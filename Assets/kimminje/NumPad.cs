@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NumPad : MonoBehaviour
+public class NumPad : StaticComponent<NumPad>
 {
     public Button[] buttons;
     System.Random random = new System.Random();
