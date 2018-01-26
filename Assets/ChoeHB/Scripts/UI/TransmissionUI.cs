@@ -13,20 +13,12 @@ public class TransmissionUI : SerializedMonoBehaviour {
     public void SetTransmission(Transmission transmission)
     {
         this.transmission = transmission;
-
-        //CityUI src = WorldMap.instance.cityUIs[transmission.src];
-        //CityUI dst = WorldMap.instance.cityUIs[transmission.dst];
-
-        //transform.SetParent(src.transform);
-        //transform.localPosition = Vector2.zero;
-
-        //Vector2 direction = dst.transform.position - src.transform.position;
-        //float angle = Mathf.Atan2(direction.y, direction.x) * 180 / 3.14f;
-
-        //arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
         name = string.Format("{0} => {1}",transmission.src.name, transmission.dst.name);
-        firewallCountText.text = "" + transmission.firewalls.Count;
-        Debug.Log(firewallCountText.text);
+
+        UpdateFirewall();
+
+        transmission.OnSuccessHack      += SuccessHack;
+        transmission.OnSuccessFirewall  += UpdateFirewall;
     }
 
     private void Update()
@@ -34,4 +26,13 @@ public class TransmissionUI : SerializedMonoBehaviour {
         firewallCountText.transform.rotation = Quaternion.identity;
     }
 
+    private void SuccessHack()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void UpdateFirewall()
+    {
+        firewallCountText.text = "" + transmission.firewalls.Count;
+    }
 }

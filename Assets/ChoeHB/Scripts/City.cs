@@ -8,11 +8,13 @@ using UnityEngine.UI;
 [Serializable]
 public class City {
 
-    public string name;
-    public Dictionary<City, Transmission> transmissions { get; private set; }
+    public readonly string name;
+    public readonly Dictionary<City, Transmission> transmissions;
 
-    private IntRange firewallCount; // 벽 갯수
-    private IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
+    private readonly IntRange firewallCount; // 벽 갯수
+    private readonly IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
+
+    public bool isHacked { get; private set; }
 
     public City(CityData cityData)
     {
@@ -20,9 +22,30 @@ public class City {
         firewallCount   = cityData.fireWallCount;
         difficulty      = cityData.difficulty;
 
-        transmissions       = new Dictionary<City, Transmission>();
+        transmissions   = new Dictionary<City, Transmission>();
     }
 
+    public void StartingCity()
+    {
+        Hack();
+    }
+
+    public void Hack()
+    {
+        foreach(var nearCity in transmissions.Keys)
+        {
+            // 나를 향하고 있는 Transmission들
+            Transmission trans = nearCity.transmissions[this];
+                trans.SuccessHack();
+        }
+    }
+
+    public override string ToString()
+    {
+        return "City(" + name + ")";
+    }
+
+    #region Static - Link 
     public static Road Link(City city1, City city2)
     {
         Transmission city1to2 = AddTransmission(city1, city2);
@@ -32,37 +55,18 @@ public class City {
 
     private static Transmission AddTransmission(City src, City dst)
     {
-        List<Firewall> firewalls = new List<Firewall>();
+        Stack<Firewall> firewalls = new Stack<Firewall>();
         int firewallCount = dst.firewallCount.Random();
         for (int i = 0; i < firewallCount; i++)
         {
             int difficulty = dst.difficulty.Random();
             Firewall firewall = new Firewall(difficulty);
-            firewalls.Add(firewall);
+            firewalls.Push(firewall);
         }
 
         Transmission transmission = new Transmission(src, dst, firewalls);
         src.transmissions.Add(dst, transmission);
-
         return transmission;
     }
-
-    //public void Initialize(Dictionary<City, List<Firewall>> firewalls)
-    //{
-    //    this.firewalls = firewalls;
-
-    //    foreach (List<Firewall> firewallList in firewalls.Values)
-    //    {
-    //        int firewallCount = this.firewallCount.Random();
-
-    //        // 각각의 방화벽을 만든다.
-    //        for (int i = 0; i < firewallCount; i++)
-    //        {
-    //            int difficulty = this.difficulty.Random();
-    //            Firewall firewall = new Firewall(difficulty);
-    //            firewallList.Add(firewall);
-    //        }
-    //    }
-    //}
-    
+    #endregion
 }
