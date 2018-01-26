@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 public class Firewall {
 
     [ShowInInspector] public int difficulty { get; private set; }
+
     public Firewall(int difficulty)
     {
         this.difficulty = difficulty;

@@ -33,7 +33,7 @@ public class Transmission {
         if (firewalls.Count == 0)
             SuccessHack();
     }
-
+    
     public void SuccessHack()
     {
         firewalls.Clear();

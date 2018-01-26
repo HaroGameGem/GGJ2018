@@ -32,6 +32,7 @@ public class City {
 
     public void Hack()
     {
+        isHacked = true;
         foreach(var nearCity in transmissions.Keys)
         {
             // 나를 향하고 있는 Transmission들
