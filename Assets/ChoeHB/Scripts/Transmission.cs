@@ -47,6 +47,7 @@ public class Transmission {
 
     public void TryHack(bool result)
     {
+        Debug.Log(result);
         if (result)
             SuccessHack();
 

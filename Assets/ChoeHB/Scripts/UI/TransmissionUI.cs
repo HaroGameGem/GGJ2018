@@ -34,7 +34,8 @@ public class TransmissionUI : SerializedMonoBehaviour {
     public void TryHack()
     {
         Action<bool> resultCallback = transmission.TryHack;
-        resultCallback(true);
+        NumPad.instance.Float();
+        NumPad.instance.Active(transmission.firewalls.Peek().difficulty, resultCallback);
     }
 
     private void Disable()
