@@ -6,18 +6,19 @@ using UnityEngine;
 [Serializable]
 public class Transmission {
 
-    public City destination;
-    public List<Firewall> firewalls;
+    public readonly City src;
+    public readonly City dst;
+    public readonly List<Firewall> firewalls;
 
-    public Transmission(City destination, List<Firewall> firewalls)
+    public Transmission(City src, City dst, List<Firewall> firewalls)
     {
-        this.destination    = destination;
+        this.src            = src;
+        this.dst            = dst;
         this.firewalls      = firewalls;
     }
 
-    //public override string ToString()
-    //{
-    //    string txt = "to " + destination.name + "\n";
-    //    foreach(var firewall in firw)
-    //}
+    public override string ToString()
+    {
+        return string.Format("{0} => {1} : {2}", src.name, dst.name, firewalls.Count);
+    }
 }

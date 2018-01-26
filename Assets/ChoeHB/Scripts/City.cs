@@ -41,7 +41,7 @@ public class City {
             firewalls.Add(firewall);
         }
 
-        Transmission transmission = new Transmission(dst, firewalls);
+        Transmission transmission = new Transmission(src, dst, firewalls);
         src.transmissions.Add(dst, transmission);
 
         return transmission;

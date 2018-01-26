@@ -157,7 +157,8 @@ PlayerSettings:
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.GGJ.Test
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
@@ -550,7 +551,9 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
+    1: ODIN_INSPECTOR
     7: ODIN_INSPECTOR
+    18: ODIN_INSPECTOR
   platformArchitecture: {}
   scriptingBackend: {}
   incrementalIl2cppBuild: {}
