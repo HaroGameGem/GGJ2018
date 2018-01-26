@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,8 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
         UpdateFirewall();
 
-        transmission.OnSuccessHack      += SuccessHack;
-        transmission.OnSuccessFirewall  += UpdateFirewall;
+        transmission.OnSuccessDestroy      += Disable;
+        transmission.OnSuccessHack  += UpdateFirewall;
     }
 
     private void Update()
@@ -32,10 +33,11 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
     public void TryHack()
     {
-
+        Action<bool> resultCallback = transmission.TryHack;
+        resultCallback(true);
     }
 
-    private void SuccessHack()
+    private void Disable()
     {
         gameObject.SetActive(false);
     }

@@ -7,10 +7,10 @@ using UnityEngine;
 public class Transmission {
 
     // 방화벽 1개 뚫었을 때
-    public event Action OnSuccessFirewall;
+    public event Action OnSuccessHack;
 
     // 모든 방화벽을 뚫었을 때
-    public event Action OnSuccessHack;
+    public event Action OnSuccessDestroy;
 
     public readonly City src;
     public readonly City dst;
@@ -23,22 +23,40 @@ public class Transmission {
         this.firewalls      = firewalls;
     }
 
-    public void SuccessFirewall()
+
+    // 점령당함
+    public void SuccessDestroy()
+    {
+        firewalls.Clear();
+        if (OnSuccessDestroy != null)
+            OnSuccessDestroy();
+    }
+
+    // 방화벽 1개 부숨
+    private void SuccessHack()
     {
         firewalls.Pop();
 
-        if (OnSuccessFirewall != null)
-            OnSuccessFirewall();
-
-        if (firewalls.Count == 0)
-            SuccessHack();
-    }
-    
-    public void SuccessHack()
-    {
-        firewalls.Clear();
         if (OnSuccessHack != null)
             OnSuccessHack();
+
+        if (firewalls.Count == 0)
+            dst.DestroyCity();
+
+    }
+
+    public void TryHack(bool result)
+    {
+        if (result)
+            SuccessHack();
+
+        else
+            FailHack();
+    }
+
+    private void FailHack()
+    {
+        Debug.Log("Fail..");
     }
 
     public override string ToString()

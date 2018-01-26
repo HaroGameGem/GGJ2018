@@ -27,17 +27,17 @@ public class City {
 
     public void StartingCity()
     {
-        Hack();
+        DestroyCity();
     }
 
-    public void Hack()
+    public void DestroyCity()
     {
         isHacked = true;
         foreach(var nearCity in transmissions.Keys)
         {
             // 나를 향하고 있는 Transmission들
             Transmission trans = nearCity.transmissions[this];
-                trans.SuccessHack();
+                trans.SuccessDestroy();
         }
     }
 
