@@ -4,4 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ThirdParty/mobile_touch_camera/scenes/demo_scene_2d_sideview.unity
+    guid: a388b73fe87ac2147b6658ab45a58fbb
