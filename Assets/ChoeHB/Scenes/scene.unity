@@ -169,7 +169,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a850e8e0db87fe047a46f6dccb76a5ab, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 3ba25489833014245a46435a453dd242, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -364,7 +364,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a850e8e0db87fe047a46f6dccb76a5ab, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 3ba25489833014245a46435a453dd242, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -1886,7 +1886,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -2806,7 +2806,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -2953,7 +2953,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a850e8e0db87fe047a46f6dccb76a5ab, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 3ba25489833014245a46435a453dd242, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3806,7 +3806,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -4462,9 +4462,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a850e8e0db87fe047a46f6dccb76a5ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ba25489833014245a46435a453dd242, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -4732,7 +4732,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:
@@ -4854,7 +4854,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 942569943}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 3
         m_Arguments:

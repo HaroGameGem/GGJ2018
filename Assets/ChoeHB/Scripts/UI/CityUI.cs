@@ -11,7 +11,6 @@ public class CityUI : SerializedMonoBehaviour {
 
     public static bool isStarted;
 
-
     [SerializeField] Image cityImage;
 
     public event Action<City> OnClick;
