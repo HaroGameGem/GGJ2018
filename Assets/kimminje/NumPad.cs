@@ -11,10 +11,15 @@ public class NumPad : StaticComponent<NumPad>
     public Text[] text;
     public Image image;
     public Image Pad;
-    public Text endtext;
 
     int usernum = 0, hack = 0, numcnt = 0, success = 0, clicked = 0;
     float timecount = 0.0f;
+
+    private void Awake()
+    {
+        image.gameObject.SetActive(false);
+        Pad.gameObject.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,18 +36,14 @@ public class NumPad : StaticComponent<NumPad>
         //성공했을때
         if (success >= numcnt && (5 - timecount) >= 0)
         {
-            End();
-            endtext.GetComponent<Text>().text = "win";
-            endtext.rectTransform.localPosition = new Vector2(0, 0);
             resultCallback(true);
+            End();
         }
         //실패했을때
         else if ((5 - timecount) < 0)
         {
-            End();
-            endtext.GetComponent<Text>().text = "Lose";
-            endtext.rectTransform.localPosition = new Vector2(0, 0);
             resultCallback(false);
+            End();
         }
 
     }
@@ -63,7 +64,6 @@ public class NumPad : StaticComponent<NumPad>
             }
             if (check == 0)
             {
-                Debug.Log("Set" + n);
                 buttons[filled].GetComponentInChildren<Text>().text = n.ToString();
                 filled++;
             }
@@ -82,10 +82,8 @@ public class NumPad : StaticComponent<NumPad>
         }
         else
         {
-            End();
-            endtext.GetComponent<Text>().text = "Lose";
-            endtext.rectTransform.localPosition = new Vector2(0, 0);
             resultCallback(false);
+            End();
         }
     }
 
@@ -94,7 +92,8 @@ public class NumPad : StaticComponent<NumPad>
     //패드가 나옴
     public void Float()
     {
-        Pad.rectTransform.anchoredPosition = new Vector2(0, 0);
+        image.gameObject.SetActive(true);
+        Pad.gameObject.SetActive(true);
     }
 
     //해킹을 시작할때 
@@ -119,13 +118,18 @@ public class NumPad : StaticComponent<NumPad>
     //끝났을때 다 없애기
     void End()
     {
-        Destroy(image.gameObject);
-        Destroy(Pad.gameObject);
-        for (int i = 0; i < 8; i++)
+        image.gameObject.SetActive(false);
+        Pad.gameObject.SetActive(false);
+
+        for (int i = 0; i < numcnt; i++)
         {
-            Destroy(text[i].gameObject);
+            text[i].rectTransform.localPosition = new Vector2(900, 0);
         }
         resultCallback = null;
         hack = 0;
+        timecount = 0;
+        image.fillAmount = 1;
+        success = 0;
+
     }
 }
