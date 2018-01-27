@@ -9,17 +9,19 @@ using UnityEngine.UI;
 [Serializable]
 public class City {
 
+    public event Action OnRecovery;
     public event Action OnDestroy;
 
     public readonly string name;
     public readonly bool canStart;
     public readonly int income;
 
-    private readonly Dictionary<City, Transmission> transmissions;
-    private readonly IntRange firewallCount; // 벽 갯수
-    private readonly IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
+    public readonly IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
+    public readonly Dictionary<City, Transmission> transmissions;
 
-    public bool isDestroied { get; private set; }
+    private readonly IntRange firewallCount; // 벽 갯수
+
+    public bool isDestroyed { get; private set; }
 
     public City(CityData cityData)
     {
@@ -42,31 +44,50 @@ public class City {
     // 도시가 파괴되면
     public void DestroyCity()
     {
-        isDestroied = true;
+        isDestroyed = true;
 
-        // 인접한 도시가 
+        // 인접한 도시를
         foreach (var nearCity in transmissions.Keys)
         {
+            // 향하는 Transmission들을 약화시킨다.
+            nearCity.FromTransmissions().ForEach(tr => tr.Debuffed());
 
             // 해킹되지 않았으면 내가 향할 Transmission들을 활성화하고
-            if (!nearCity.isDestroied)
+            if (!nearCity.isDestroyed)
             {
                 Transmission to = transmissions[nearCity];
                 to.Active();
             }
-
-            // 나를 향하고 있는 Transmission들은 파괴한다.
-            Transmission from = nearCity.transmissions[this];
-                from.SuccessDestroy();
         }
 
+        // 나를 향하고 있는 Transmission들을 파괴한다.
+        FromTransmissions().ForEach(tr => tr.SuccessDestroy());
+
+        Debug.Log("Destroy " + name);
         if (OnDestroy != null)
             OnDestroy();
     }
 
+    // 도시가 복구되면
+    public void Recovery()
+    {
+        isDestroyed = false;
+        FromTransmissions().ForEach(tr => tr.Recovery());
+
+        if (OnRecovery != null)
+            OnRecovery();
+    }
+
+
     public IEnumerable<Transmission> GetActivedTransmission()
     {
         return transmissions.Values.Where(tr => tr.isActived);
+    }
+
+    private IEnumerable<Transmission> FromTransmissions()
+    {
+        foreach(var nearCity in transmissions.Keys)
+            yield return nearCity.transmissions[this];
     }
 
     public override string ToString()

@@ -19,6 +19,7 @@ public class CityUI : SerializedMonoBehaviour {
 
     public static Dictionary<City, CityUI> cityUIs { get; private set; }
 
+    [SerializeField] Vaccine vaccine;
     [SerializeField] Character characterPrefab;
     [SerializeField] Transform characterHolder;
 
@@ -26,6 +27,8 @@ public class CityUI : SerializedMonoBehaviour {
 
     private Button button;
     private City city;
+
+    private Dictionary<Transmission, Character> characters;
 
     private void Awake()
     {
@@ -38,17 +41,25 @@ public class CityUI : SerializedMonoBehaviour {
             button.interactable = city.canStart;
 
         if (state == State.Started)
-            button.interactable = city.isDestroied;
-        
+            button.interactable = city.isDestroyed;
+
+    }
+
+    public void OccurVaccine()
+    {
+        vaccine.Occur();
     }
 
     public void SetCity(City city)
     {
         this.city = city;
+        vaccine.SetCity(city);
         cityUIs = cityUIs ?? new Dictionary<City, CityUI>();
         cityUIs.Add(city, this);
         city.OnDestroy += Transmission;
+        city.OnRecovery += InterruptTransmission;
     }
+    
 
     public void Click()
     {
@@ -60,14 +71,29 @@ public class CityUI : SerializedMonoBehaviour {
     // 캐릭터들을 보냄
     public void Transmission()
     {
-        foreach(var transmission in city.GetActivedTransmission())
+        if (characters == null)
+        {
+            characters = new Dictionary<Transmission, Character>();
+            foreach (var nearCity in city.transmissions.Keys)
+            {
+                Transmission transmission = city.transmissions[nearCity];
+                Character character = Instantiate(characterPrefab);
+                character.gameObject.SetActive(false);
+                characters.Add(transmission, character);
+            }
+        }
+
+        foreach (var transmission in city.GetActivedTransmission())
         {
             CityUI target = cityUIs[transmission.dst];
-            Character character = Instantiate(characterPrefab);
-            //character.transform.SetParent(characterHolder, false);
-            character.Transmission(transmission);
-            character.gameObject.SetActive(true);
+            Character character = characters[transmission];
+                character.Transmission(transmission);
         }
+    }
+
+    private void InterruptTransmission()
+    {
+        city.GetActivedTransmission().Select(tr => characters[tr]).ForEach(ch => ch.Interrupted());
     }
 
     private void ZoomIn()

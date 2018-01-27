@@ -3,24 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using DG.Tweening;
+using FlyingWormConsole3;
 
 [Serializable]
 public class Firewall {
 
     public event Action OnUpdateDifficulty;
 
-    public int difficulty { get; private set; }
+    private int difficulty_;
+    public int difficulty
+    {
+        get { return difficulty_; }
+        set
+        {
+            difficulty_ = value;
+            if (OnUpdateDifficulty != null)
+                OnUpdateDifficulty();
+        }
+    }
 
     public Firewall(int difficulty)
     {
         this.difficulty = difficulty;
     }
     
-    public void UpdateDifficulty(int difficulty)
+    public void Debuffed()
     {
-        this.difficulty = difficulty;
-        if (OnUpdateDifficulty != null)
-            OnUpdateDifficulty();
+        difficulty--;
     }
 
 }

@@ -39,11 +39,14 @@ public class TransmissionUI : SerializedMonoBehaviour {
     {
         if (isTryingHack)
             return;
+
+        AudioManager.PlaySound("Hacking");
         isTryingHack = true;
 
         Action<bool> resultCallback = (result) =>
         {
-            Debug.Log("Result " + result);
+            string audioName = result ? "HackSuccess" : "HackFail";
+            AudioManager.PlaySound(audioName);
             isTryingHack = false;
             transmission.TryHack(result);
         };

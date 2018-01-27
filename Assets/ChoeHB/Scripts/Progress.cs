@@ -15,7 +15,7 @@ public class Progress
         get { return current_; }
         set
         {
-            current_ = Mathf.Max(current, value);
+            current_ = Mathf.Min(dst, value);
         }
     }
 

@@ -434,10 +434,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  vaccineOccurData:
+    occurInterval: 7
+    defaultOccurRate: 0.3
+    occurRatePerCity: 0.02
   deadline: 300
   incomeInterval: 3
   m_credit:
-    dst: 500
+    dst: 10
     format: '{0} / {1}'
   alarm: {fileID: 74508377}
   canvas: {fileID: 637568053}
@@ -3581,6 +3585,11 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 2e4a6628bb0d044b7bfe836bc218d553, type: 3}
+    - {fileID: 8300000, guid: 842df6f944a684f489e226eba7ebbd87, type: 3}
+    - {fileID: 8300000, guid: 02abdce2180bf4c39a9088805cd49061, type: 3}
+    - {fileID: 8300000, guid: dd183e9c6764f43fba708d4827c7e5d7, type: 3}
+    - {fileID: 8300000, guid: b6d09eb6ea8d6410f885902c05fe077c, type: 3}
     - {fileID: 8300000, guid: e8766958b76904c4b8b43d0fd0d6e1a5, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -3600,16 +3609,76 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 6
     - Name: 
       Entry: 7
       Data: 
     - Name: 
       Entry: 1
-      Data: 
+      Data: Hacking
     - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: HackSuccess
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: HackFail
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: Win
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: BGM1
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: BGM2
+    - Name: 
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -3619,7 +3688,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  defaultBGM: {fileID: 0}
+  defaultBGM: {fileID: 8300000, guid: b6d09eb6ea8d6410f885902c05fe077c, type: 3}
   defaultSoundCount: 5
   minPitch: 0.97
   maxPitch: 1.03
@@ -7607,6 +7676,11 @@ Prefab:
     - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}

@@ -30,6 +30,14 @@ public class Transmission {
         isActived = false;
     }
     
+
+    // 약화
+    public void Debuffed()
+    {
+        firewalls.ForEach(fw => fw.Debuffed());
+    }
+    
+    // 활성화
     public void Active()
     {
         isActived = true;
@@ -54,7 +62,7 @@ public class Transmission {
     {
         firewalls.Clear();
         isActived = false;
-
+        
         if (OnSuccessDestroy != null)
             OnSuccessDestroy();
     }
@@ -64,6 +72,7 @@ public class Transmission {
     {
         Firewall top = Top();
         firewalls.Remove(top);
+
         if (OnSuccessHack != null)
             OnSuccessHack(top);
 
@@ -73,6 +82,17 @@ public class Transmission {
 
     private void FailHack()
     {
+    }
+
+    // 백신이 방화벽을 복구
+    public void Recovery()
+    {
+        Active();
+        Firewall firewall = new Firewall(dst.difficulty);
+            firewalls.Add(firewall);
+
+        if (OnAddFirewall != null)
+            OnAddFirewall(firewall);
     }
 
     public override string ToString()

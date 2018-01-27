@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 2268797285a75fd4583409331c378465
-timeCreated: 1516983338
+timeCreated: 1517055918
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,7 @@ TextureImporter:
     21300008: sd_char1_thigh
     21300010: sd_char1_calf
     21300012: sd_char1_head_victory
+    21300014: Char_Arrow
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -180,6 +181,20 @@ TextureImporter:
         height: 127
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Char_Arrow
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 123
+        width: 48
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

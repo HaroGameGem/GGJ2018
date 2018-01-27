@@ -6,15 +6,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Random = UnityEngine.Random;
+
 public class WorldMap : StaticComponent<WorldMap> {
 
     // RoadData에서 사용
     public static string[] cityNames    { get { return instance.cityDatas.Select(city => city.name).ToArray(); } }
 
     [Header("Data")]
-    [SerializeField] int deadline;              // 게임 타이머
-    [SerializeField] float incomeInterval;      // 인컴이 오르는 주기
-    [SerializeField] Progress m_credit;         // 현재 화폐 / 목표화폐
+    [SerializeField] VaccineOccurData vaccineOccurData;     // 백신 발생에 대한 정보
+    [SerializeField] int deadline;                          // 게임 타이머
+    [SerializeField] float incomeInterval;                  // 인컴이 오르는 주기
+    [SerializeField] Progress m_credit;                     // 현재 화폐 / 목표화폐
 
     [Header("Component")]
     [SerializeField] Alarm alarm;
@@ -42,6 +45,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     private void Start()
     {
+        string bgmName = "BGM" + UnityEngine.Random.Range(1, 3); ;
+        AudioManager.PlayMusic(bgmName);
         Initialize();
     }
 
@@ -140,14 +145,36 @@ public class WorldMap : StaticComponent<WorldMap> {
         city.StartingCity();
         CityUI.StartHack();
         alarm.StartAlert(incomeInterval, Income);
+
+        StartCoroutine(VaccineOccuring());
     }
 
     private void Income()
     {
-        int sum = (from city in citys.Values where city.isDestroied select city.income).Sum();
+        int sum = (from city in citys.Values where city.isDestroyed select city.income).Sum();
         credit += sum;
+
         if (credit.isSuccessed)
             GameClear();
+    }
+
+    private IEnumerator VaccineOccuring()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(vaccineOccurData.occurInterval);
+            IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed);
+            float occurRate = vaccineOccurData.GetOccurRate(destroyedCitys.Count());
+            Debug.Log("Vaccine Occuring "+occurRate);
+            foreach (var destroyedCity in destroyedCitys)
+            {
+                // 백신 발생
+                if (Random.Range(0, 1f) < occurRate)
+                {
+                    cityUIs[destroyedCity].OccurVaccine();
+                }
+            }
+        }
     }
 
     private void OnDestroyCity()
@@ -157,7 +184,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     public void GameClear()
     {
-        Debug.Log("Game Clear");
+        AudioManager.StopMusic();
+        AudioManager.PlaySound("Win");
     }
-
+    
 }

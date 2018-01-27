@@ -23,6 +23,7 @@ public class Character : SerializedMonoBehaviour {
 
     public void Transmission(Transmission transmission)
     {
+        gameObject.SetActive(true);
         this.transmission = transmission;
         transmission.dst.OnDestroy += VictoryAnimation;
 
@@ -99,7 +100,7 @@ public class Character : SerializedMonoBehaviour {
     }
 
     private bool isVictoried;
-    public void Victory()
+    private void Victory()
     {
         if (isVictoried)
             return;
@@ -108,8 +109,18 @@ public class Character : SerializedMonoBehaviour {
         VictoryAnimation();
     }
     
+    public void Interrupted()
+    {
+        // 사망모션 이후 사라진다.
+        Debug.Log("Dead");
+        gameObject.SetActive(false);
+    }
+
     private void VictoryAnimation()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         isVictoried = true;
         animation.Play("Victory");
         SpriteRenderer[] spriteRenders = GetComponentsInChildren<SpriteRenderer>();
@@ -120,6 +131,5 @@ public class Character : SerializedMonoBehaviour {
     {
         yield return new WaitForSeconds(fadingTime);
         gameObject.SetActive(false);
-
     }
 }
