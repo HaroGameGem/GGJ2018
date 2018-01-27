@@ -24,12 +24,17 @@ public class Character : SerializedMonoBehaviour {
     public void Transmission(Transmission transmission)
     {
         this.transmission = transmission;
+        transmission.dst.OnDestroy += VictoryAnimation;
+
         CityUI src = CityUI.cityUIs[transmission.src];
         transform.position = src.transform.position;
     }
 
     private void Update()
     {
+        if (isVictoried)
+            return;
+
         Vector3 src = transform.position;
 
         var firewalls = transmission.firewalls;
@@ -98,15 +103,18 @@ public class Character : SerializedMonoBehaviour {
     {
         if (isVictoried)
             return;
+        
+        transmission.dst.DestroyCity();
+        VictoryAnimation();
+    }
+    
+    private void VictoryAnimation()
+    {
         isVictoried = true;
         animation.Play("Victory");
-        transmission.dst.DestroyCity();
         SpriteRenderer[] spriteRenders = GetComponentsInChildren<SpriteRenderer>();
-        //foreach(var sr in spriteRenders)
-        //    sr.DOFade(0, fadingTime);
         StartCoroutine(Disabling());
     }
-
 
     private IEnumerator Disabling()
     {
