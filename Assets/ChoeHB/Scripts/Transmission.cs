@@ -9,6 +9,9 @@ public class Transmission {
     // 방화벽 1개 뚫었을 때
     public event Action OnSuccessHack;
 
+    // 새로운 방화벽이 추가되었을 때
+    public event Action<Firewall> OnAddFirewall;
+
     // 모든 방화벽을 뚫었을 때
     public event Action OnSuccessDestroy;
 
@@ -16,18 +19,38 @@ public class Transmission {
     public readonly City dst;
     public readonly Stack<Firewall> firewalls;
 
+    public bool isActived { get; private set; }
+
     public Transmission(City src, City dst, Stack<Firewall> firewalls)
     {
         this.src            = src;
         this.dst            = dst;
         this.firewalls      = firewalls;
+
+        isActived = false;
+    }
+    
+    public void Active()
+    {
+        isActived = true;
     }
 
+    public void TryHack(bool result)
+    {
+        if (result)
+            SuccessHack();
+
+        else
+            FailHack();
+    }
 
     // 점령당함
     public void SuccessDestroy()
     {
+        Debug.Log("Destroy " + this);
         firewalls.Clear();
+        isActived = false;
+
         if (OnSuccessDestroy != null)
             OnSuccessDestroy();
     }
@@ -40,19 +63,8 @@ public class Transmission {
         if (OnSuccessHack != null)
             OnSuccessHack();
 
-        if (firewalls.Count == 0)
-            dst.DestroyCity();
-
-    }
-
-    public void TryHack(bool result)
-    {
-        Debug.Log(result);
-        if (result)
-            SuccessHack();
-
-        else
-            FailHack();
+        //if (firewalls.Count == 0)
+        //    dst.DestroyCity();
     }
 
     private void FailHack()

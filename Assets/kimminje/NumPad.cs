@@ -31,18 +31,18 @@ public class NumPad : StaticComponent<NumPad>
         //성공했을때
         if (success >= numcnt && (5 - timecount) >= 0)
         {
-            End();
             endtext.GetComponent<Text>().text = "win";
             endtext.rectTransform.localPosition = new Vector2(0, 0);
             resultCallback(true);
+            End();
         }
         //실패했을때
         else if ((5 - timecount) < 0)
         {
-            End();
             endtext.GetComponent<Text>().text = "Lose";
             endtext.rectTransform.localPosition = new Vector2(0, 0);
             resultCallback(false);
+            End();
         }
 
     }
@@ -100,7 +100,6 @@ public class NumPad : StaticComponent<NumPad>
     //해킹을 시작할때 
     public void Active(int numCount, Action<bool> resultCallback)
     {
-        Debug.Log("adad");
         hack = 1;
         Random();
         int[] PinNum = new int[numCount];
