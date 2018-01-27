@@ -7,18 +7,15 @@ using System.Text;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
-public class TitleManager : MonoBehaviour {
+public class CinematicManager : MonoBehaviour {
 
-	public Image imgTitle;
     public Image imgBG;
-
-    public Image panelContainer;
-	
+    	
     public Image[] arrImgPrologue;
     public string[] arrStrPrologue;
 
-    public Image imgEnding0;
-    public Image imgEnding1;
+    public Image[] arrImgEnding;
+    public string[] arrStrEnding;
 
     public Button btnBeginPlay;
 
@@ -31,20 +28,7 @@ public class TitleManager : MonoBehaviour {
     public float textVariabilitySecond = 0.08f;
     public string text;
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-        }
-	}
-
-    Coroutine routinePrologue;
+	Coroutine routinePrologue;
     [Button]
     public void ShowPrologue()
     {
@@ -64,6 +48,7 @@ public class TitleManager : MonoBehaviour {
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrPrologue[i]);
 			yield return new WaitWhile(() => isChatting);
 			yield return new WaitUntil(() => Input.GetMouseButton(0));
+            textBox.text = "";
 			FadeOut(arrImgPrologue[i], 1f);
 		}
 
@@ -92,7 +77,6 @@ public class TitleManager : MonoBehaviour {
         {
             item.gameObject.SetActive(false);
         }
-        textBox.text = "";
         yield return StartCoroutine(CoLoadGameScene());
         FadeOut(imgBG, 1f);
     }
@@ -114,16 +98,25 @@ public class TitleManager : MonoBehaviour {
 
     IEnumerator CoShowEnding()
     {
-        FadeIn(imgBG, 1f);
-        yield return new WaitForSeconds(0.5f);
-        FadeIn(imgEnding0, 0.8f);
-        yield return new WaitForSeconds(1f);
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        FadeOut(imgEnding0, 0.8f);
-        FadeIn(panelContainer, 0.8f);
+		FadeIn(imgBG, 1f);
 		yield return new WaitForSeconds(0.8f);
-		FadeIn(imgEnding1, 0.8f);
-        ChatText(textIntervalSecond, textVariabilitySecond, "");
+
+		for (int i = 0; i < arrImgPrologue.Length; i++)
+		{
+			FadeIn(arrImgEnding[i], 1f);
+			ChatText(textIntervalSecond, textVariabilitySecond, arrStrEnding[i]);
+			yield return new WaitWhile(() => isChatting);
+			yield return new WaitUntil(() => Input.GetMouseButton(0));
+			FadeOut(arrImgEnding[i], 1f);
+		}
+
+        /*
+		btnBeginPlay.transform.localScale = Vector3.zero;
+		btnBeginPlay.gameObject.SetActive(true);
+		btnBeginPlay.transform.DOScale(Vector3.one, 0.5f)
+					.SetEase(Ease.OutQuad);
+					*/
+		routineEnding = null;
     }
 
     void FadeIn(Image img, float duration)
@@ -163,8 +156,8 @@ public class TitleManager : MonoBehaviour {
 
     IEnumerator CoChatText(float intervalSecond, float variabilitySecond, string text)
     {
-        StringBuilder builder = new StringBuilder(100);
-        for (int i = 0; i < text.Length; i++)
+		StringBuilder builder = new StringBuilder(100);
+		for (int i = 0; i < text.Length; i++)
         {
             if(text[i] == 'n')
             {

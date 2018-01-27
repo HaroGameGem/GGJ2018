@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ThirdParty/mobile_touch_camera/scenes/demo_scene_2d_sideview.unity
-    guid: a388b73fe87ac2147b6658ab45a58fbb
+    path: Assets/Art/Title.unity
+    guid: 93e7879d6874eb4429c57cf657412c02
+  - enabled: 1
+    path: Assets/ChoeHB/Scenes/Cinematic.unity
+    guid: 06bf5cb1a776641b2a05cb1313d2551d
