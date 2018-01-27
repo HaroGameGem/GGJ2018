@@ -9,15 +9,20 @@ using UnityEngine.SceneManagement;
 
 public class CinematicManager : MonoBehaviour {
 
+    public Image imgFade;
     public Image imgBG;
     	
     public Image[] arrImgPrologue;
     public string[] arrStrPrologue;
+    bool isPlayingPrologue = false;
 
     public Image[] arrImgEnding;
     public string[] arrStrEnding;
+    bool isPlayingEnding = false;
 
     public Button btnBeginPlay;
+    public Button btnGoToTitle;
+    public Button btnSkip;
 
     public Text textBox;
     bool isChatting = false;
@@ -39,18 +44,25 @@ public class CinematicManager : MonoBehaviour {
 
     IEnumerator CoShowPrologue()
     {
-        FadeIn(imgBG, 1f);
-		yield return new WaitForSeconds(0.8f);
+		isPlayingPrologue = true;
+
+		btnSkip.transform.localScale = Vector3.zero;
+		btnSkip.gameObject.SetActive(true);
+		btnSkip.transform.DOScale(Vector3.one, 0.5f)
+					.SetEase(Ease.OutQuad);
 
         for (int i = 0; i < arrImgPrologue.Length; i++)
         {
-			FadeIn(arrImgPrologue[i], 1f);
+            FadeHelper.FadeIn(arrImgPrologue[i], 1f);
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrPrologue[i]);
 			yield return new WaitWhile(() => isChatting);
 			yield return new WaitUntil(() => Input.GetMouseButton(0));
-            textBox.text = "";
-			FadeOut(arrImgPrologue[i], 1f);
+            FadeHelper.FadeOut(arrImgPrologue[i], 1f);
 		}
+
+        btnSkip.transform.DOScale(Vector3.zero, 0.5f)
+			.SetEase(Ease.InQuad)
+			.OnComplete(() => btnSkip.gameObject.SetActive(false));
 
         btnBeginPlay.transform.localScale = Vector3.zero;
         btnBeginPlay.gameObject.SetActive(true);
@@ -58,34 +70,34 @@ public class CinematicManager : MonoBehaviour {
                     .SetEase(Ease.OutQuad);
 
         routinePrologue = null;
+        Debug.Log("hi Show");
     }
 
     public void HidePrologue()
     {
-        if (routinePrologue != null)
-            return;
-        routinePrologue = StartCoroutine(CoHidePrologue());
+        if(routinePrologue != null)
+        {
+			StopCoroutine(routinePrologue);
+            if(routineChatText != null)
+                StopCoroutine(routineChatText);
+		}
+		routinePrologue = StartCoroutine(CoHidePrologue());
     }
 
     IEnumerator CoHidePrologue()
     {
-        btnBeginPlay.transform.DOScale(Vector3.zero, 0.5f)
+		btnBeginPlay.transform.DOScale(Vector3.zero, 0.5f)
                     .SetEase(Ease.InQuad)
                     .OnComplete(() => btnBeginPlay.gameObject.SetActive(false));
+        textBox.gameObject.SetActive(false);
+        btnSkip.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         foreach (var item in arrImgPrologue)
         {
             item.gameObject.SetActive(false);
         }
-        yield return StartCoroutine(CoLoadGameScene());
-        FadeOut(imgBG, 1f);
-    }
-
-    IEnumerator CoLoadGameScene()
-    {
-        //yield return SceneManager.LoadSceneAsync("GameScene");
-        yield return null;
-    }
+		isPlayingPrologue = false;
+	}
 
     Coroutine routineEnding;
     [Button]
@@ -98,60 +110,73 @@ public class CinematicManager : MonoBehaviour {
 
     IEnumerator CoShowEnding()
     {
-		FadeIn(imgBG, 1f);
+        isPlayingEnding = true;
+        FadeHelper.FadeIn(imgBG, 1f);
 		yield return new WaitForSeconds(0.8f);
+
+		btnSkip.transform.localScale = Vector3.zero;
+		btnSkip.gameObject.SetActive(true);
+		btnSkip.transform.DOScale(Vector3.one, 0.5f)
+					.SetEase(Ease.OutQuad);
 
 		for (int i = 0; i < arrImgPrologue.Length; i++)
 		{
-			FadeIn(arrImgEnding[i], 1f);
+            FadeHelper.FadeIn(arrImgEnding[i], 1f);
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrEnding[i]);
 			yield return new WaitWhile(() => isChatting);
 			yield return new WaitUntil(() => Input.GetMouseButton(0));
-			FadeOut(arrImgEnding[i], 1f);
+            FadeHelper.FadeOut(arrImgEnding[i], 1f);
 		}
 
-        /*
-		btnBeginPlay.transform.localScale = Vector3.zero;
-		btnBeginPlay.gameObject.SetActive(true);
-		btnBeginPlay.transform.DOScale(Vector3.one, 0.5f)
+		btnSkip.transform.DOScale(Vector3.zero, 0.5f)
+			.SetEase(Ease.InQuad)
+			.OnComplete(() => btnSkip.gameObject.SetActive(false));
+
+        btnGoToTitle.transform.localScale = Vector3.zero;
+		btnGoToTitle.gameObject.SetActive(true);
+		btnGoToTitle.transform.DOScale(Vector3.one, 0.5f)
 					.SetEase(Ease.OutQuad);
-					*/
+					
 		routineEnding = null;
     }
 
-    void FadeIn(Image img, float duration)
-    {
-        Color color = img.color;
-        if(!img.gameObject.activeSelf)
-        {
-            img.color = Color.clear;
-			img.gameObject.SetActive(true);
-        }
+	public void HideEnding()
+	{
+		if (routineEnding == null)
+			return;
+        StopAllCoroutines();
+		routineEnding = StartCoroutine(CoHideEnding());
+	}
 
-        img.DOColor(color, duration);
-    }
-
-    void FadeOut(Image img, float duration)
-    {
-        img.DOKill();
-        if (!img.gameObject.activeSelf)
+	IEnumerator CoHideEnding()
+	{
+		btnGoToTitle.transform.DOScale(Vector3.zero, 0.5f)
+					.SetEase(Ease.InQuad)
+					.OnComplete(() => btnBeginPlay.gameObject.SetActive(false));
+        textBox.text = "";
+        FadeHelper.FadeIn(imgFade, 1f);
+		yield return new WaitForSeconds(1f);
+		foreach (var item in arrImgEnding)
 		{
-            return;
+			item.gameObject.SetActive(false);
 		}
-        Color color = img.color;
-        img.DOColor(Color.clear, duration)
-           .OnComplete(() =>
-        {
-            img.gameObject.SetActive(false);
-            img.color = color;
-        });
+        FadeHelper.FadeOut(imgBG, 1f);
+        isPlayingEnding = false;
+        SceneManager.LoadSceneAsync("TitleScene");
 	}
 
 
-    public void ChatText(float intervalSecond, float variabilitySecond, string text)
+
+
+	Coroutine routineChatText = null;
+	public void ChatText(float intervalSecond, float variabilitySecond, string text)
     {
         isChatting = true;
-        StartCoroutine(CoChatText(intervalSecond, variabilitySecond, text));
+        if(routineChatText != null)
+        {
+            StopCoroutine(routineChatText);
+        }
+        routineChatText = StartCoroutine(CoChatText(intervalSecond, variabilitySecond, text));
     }
 
     IEnumerator CoChatText(float intervalSecond, float variabilitySecond, string text)
