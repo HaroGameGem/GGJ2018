@@ -37,6 +37,14 @@ public class Vaccine : MonoBehaviour {
         StopCoroutine(recovering);
         recoveringSound.Stop();
         gameObject.SetActive(false);
+        AudioManager.PlaySound("RecoveryFail");
+    }
+
+    private void RecoverySuccess()
+    {
+        city.Recovery();
+        gameObject.SetActive(false);
+        AudioManager.PlaySound("RecoverySuccess");
     }
 
     private IEnumerator Recovering(float deadline)
@@ -50,9 +58,10 @@ public class Vaccine : MonoBehaviour {
             filledArea.fillAmount = remainingTime / deadline;
             yield return new WaitForEndOfFrame();
         }
-
-        city.Recovery();
-        gameObject.SetActive(false);
+        RecoverySuccess();
+        
     }
+
+    
     
 }

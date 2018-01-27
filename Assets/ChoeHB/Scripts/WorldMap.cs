@@ -188,8 +188,9 @@ public class WorldMap : StaticComponent<WorldMap> {
             result.isCleard = isWin;
             result.time = timer.ToString();
 
-        if (isWin)
-            AudioManager.PlaySound("Win");
+        AudioManager.PlaySound(isWin ? "Win" : "Lose");
+
+        StopAllCoroutines();
 
         resultUI.Float(result);
     }
@@ -218,13 +219,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
             occureds.Clear();
             foreach (var destroyedCity in destroyedCitys)
-            {
                 if (Random.Range(0, 1f) < occurRate)
-                {
-                    Debug.Log("Add "+destroyedCity.name);
                     occureds.Add(destroyedCity);
-                }
-            }
 
             // 발생할 백신이 있다면
             if(occureds.Count != 0)

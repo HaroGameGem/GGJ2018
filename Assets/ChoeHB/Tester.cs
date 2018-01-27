@@ -32,11 +32,13 @@ public class Tester : SerializedMonoBehaviour {
 
     public void DetectCityDestroy(City city)
     {
+        var cityUI = CityUI.cityUIs[city];
         Debug.Log("Destroy " + city.name);
     }
 
     public void DetectRecoveryCity(City city)
     {
+        var cityUI = CityUI.cityUIs[city];
         Debug.Log("Recovery " + city.name);
     }
 
