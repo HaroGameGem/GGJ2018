@@ -14,7 +14,7 @@ public class TransmissionUI : SerializedMonoBehaviour {
     [SerializeField] FirewallUI firewallPrefab;
     [SerializeField] Transform firewallHolder;
 
-    private static bool isTryingHack;
+    public static bool isTryingHack { get; private set; }
 
     public void SetTransmission(Transmission transmission)
     {

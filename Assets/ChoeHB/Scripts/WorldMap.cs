@@ -199,6 +199,10 @@ public class WorldMap : StaticComponent<WorldMap> {
         while (true)
         {
             yield return new WaitForSeconds(vaccineOccurData.occurInterval);
+
+            while (TransmissionUI.isTryingHack)
+                yield return new WaitForEndOfFrame();
+
             IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed);
             float occurRate = vaccineOccurData.GetOccurRate(destroyedCitys.Count());
 

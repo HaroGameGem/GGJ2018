@@ -21,7 +21,6 @@ public class FadeHelper : MonoBehaviour {
 	public static Tweener FadeOut(Image img, float duration)
 	{
 		img.DOKill();
-		Debug.Log("FadeOut");
 		if (!img.gameObject.activeSelf)
 		{
 			return null;
