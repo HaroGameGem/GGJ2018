@@ -38,29 +38,16 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoInit()
     {
-<<<<<<< HEAD
         if(optionCanvas == null)
         {
-            Debug.Log("Test");
 			yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
-			Debug.Log(optionCanvas);
 			optionCanvas = GameObject.Find("OptionCanvas");
-            Debug.Log(optionCanvas);
 			popupExit = GameObject.Find("PopupExit");
 			imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
 			GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
 			GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
 			popupExit.gameObject.SetActive(false);
 		}
-=======
-		yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
-        optionCanvas = GameObject.Find("OptionCanvas");
-        popupExit = GameObject.Find("PopupExit");
-        imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
-        GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
-        GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
-		popupExit.gameObject.SetActive(false);
->>>>>>> 0a2e9edcaf4bc5b080d4952c9480de1cccf6e898
 		yield return new WaitForSeconds(0.5f);
         FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}

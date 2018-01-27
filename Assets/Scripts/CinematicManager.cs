@@ -74,7 +74,6 @@ public class CinematicManager : MonoBehaviour {
                     .SetEase(Ease.OutQuad);
 
         routinePrologue = null;
-        Debug.Log("hi Show");
     }
 
     public void HidePrologue()
