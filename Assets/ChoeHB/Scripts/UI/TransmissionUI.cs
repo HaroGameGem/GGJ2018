@@ -7,15 +7,22 @@ using UnityEngine.UI;
 
 public class TransmissionUI : SerializedMonoBehaviour {
 
+    public static event Action<Vector3> OnAddFirewall;
+    public static event Action<Vector3> OnDestroyFirewall;
+
     private Transmission transmission;
 
+    // Interact
+    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] float fadingAlpha;
+
     [SerializeField] Image touchingArea;
-    [SerializeField] Button hackButton;
     [SerializeField] FirewallUI firewallPrefab;
     [SerializeField] Transform firewallHolder;
 
     public static bool isTryingHack { get; private set; }
 
+    private bool cachedIsActive;
     public void SetTransmission(Transmission transmission)
     {
         this.transmission = transmission;
@@ -26,12 +33,25 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
         transmission.OnSuccessHack          += HackFirewall;
         transmission.OnAddFirewall          += AddFirewall;
+
+        cachedIsActive = !transmission.isActived;
     }
+
 
     private void Update()
     {
+        if (transmission == null)
+            return;
+
+        if (cachedIsActive == transmission.isActived)
+            return;
+
+        canvasGroup.interactable = transmission.isActived;
+        canvasGroup.blocksRaycasts = transmission.isActived;
+        canvasGroup.alpha = transmission.isActived ? 1 : fadingAlpha;
         touchingArea.raycastTarget = transmission.isActived;
-        hackButton.interactable = transmission.isActived;
+
+        cachedIsActive = transmission.isActived;
     }
     
     public void TryHack()
@@ -69,11 +89,19 @@ public class TransmissionUI : SerializedMonoBehaviour {
             firewallUI.SetFirewall(firewall);
             firewallUI.transform.SetParent(firewallHolder, false);
             firewallUI.gameObject.SetActive(true);
+
         firewallUI.name = string.Format("Firewall({0})", transmission.firewalls.IndexOf(firewall));
+
+        if (OnAddFirewall != null)
+            OnAddFirewall(firewallUI.transform.position);
     }
 
     private void HackFirewall(Firewall fire)
     {
+        Vector3 destroyedPosition = FirewallUI.firewallUIs[fire].gameObject.transform.position;
         Destroy(FirewallUI.firewallUIs[fire].gameObject);
+
+        if (OnDestroyFirewall != null)
+            OnDestroyFirewall(destroyedPosition);
     }
 }

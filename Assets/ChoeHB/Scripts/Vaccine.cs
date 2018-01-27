@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Vaccine : MonoBehaviour {
 
+    public static event Action<Vaccine> OnOccur;
+
+    [SerializeField] AudioSource recoveringSound;
     [SerializeField] float deadline;
     [SerializeField] Image filledArea;
 
@@ -23,12 +26,16 @@ public class Vaccine : MonoBehaviour {
         filledArea.fillAmount = 1;
 
         gameObject.SetActive(true);
+        recoveringSound.Play();
         recovering = StartCoroutine(Recovering(deadline));
+        if (OnOccur != null)
+            OnOccur(this);
     }
 
     public void Interrupt()
     {
         StopCoroutine(recovering);
+        recoveringSound.Stop();
         gameObject.SetActive(false);
     }
 
