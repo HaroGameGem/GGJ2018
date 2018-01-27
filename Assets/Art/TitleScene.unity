@@ -141,8 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  optionCanvas: {fileID: 0}
-  popupExit: {fileID: 0}
   imgBlackBoard: {fileID: 0}
 --- !u!4 &146799308
 Transform:
