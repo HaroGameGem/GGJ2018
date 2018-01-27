@@ -77,13 +77,13 @@ public class City {
 
     private static Transmission AddTransmission(City src, City dst)
     {
-        Stack<Firewall> firewalls = new Stack<Firewall>();
+        List<Firewall> firewalls = new List<Firewall>();
         int firewallCount = dst.firewallCount.Random();
         for (int i = 0; i < firewallCount; i++)
         {
             int difficulty = dst.difficulty.Random();
             Firewall firewall = new Firewall(difficulty);
-            firewalls.Push(firewall);
+            firewalls.Add(firewall);
         }
 
         Transmission transmission = new Transmission(src, dst, firewalls);

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Transmission {
 
     // 방화벽 1개 뚫었을 때
-    public event Action OnSuccessHack;
+    public event Action<Firewall> OnSuccessHack;
 
     // 새로운 방화벽이 추가되었을 때
     public event Action<Firewall> OnAddFirewall;
@@ -17,11 +17,11 @@ public class Transmission {
 
     public readonly City src;
     public readonly City dst;
-    public readonly Stack<Firewall> firewalls;
+    public readonly List<Firewall> firewalls;
 
     public bool isActived { get; private set; }
 
-    public Transmission(City src, City dst, Stack<Firewall> firewalls)
+    public Transmission(City src, City dst, List<Firewall> firewalls)
     {
         this.src            = src;
         this.dst            = dst;
@@ -44,10 +44,14 @@ public class Transmission {
             FailHack();
     }
 
+    public Firewall Top()
+    {
+        return firewalls[firewalls.Count - 1];
+    }
+
     // 점령당함
     public void SuccessDestroy()
     {
-        Debug.Log("Destroy " + this);
         firewalls.Clear();
         isActived = false;
 
@@ -58,10 +62,10 @@ public class Transmission {
     // 방화벽 1개 부숨
     private void SuccessHack()
     {
-        firewalls.Pop();
-
+        Firewall top = Top();
+        firewalls.Remove(top);
         if (OnSuccessHack != null)
-            OnSuccessHack();
+            OnSuccessHack(top);
 
         //if (firewalls.Count == 0)
         //    dst.DestroyCity();

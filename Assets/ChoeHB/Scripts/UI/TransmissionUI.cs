@@ -14,8 +14,6 @@ public class TransmissionUI : SerializedMonoBehaviour {
     [SerializeField] FirewallUI firewallPrefab;
     [SerializeField] Transform firewallHolder;
 
-    private Stack<FirewallUI> firewallUIs = new Stack<FirewallUI>();
-    
     public void SetTransmission(Transmission transmission)
     {
         this.transmission = transmission;
@@ -39,7 +37,7 @@ public class TransmissionUI : SerializedMonoBehaviour {
     {
         Action<bool> resultCallback = transmission.TryHack;
         NumPad.instance.Float();
-        NumPad.instance.Active(transmission.firewalls.Peek().difficulty, resultCallback);
+        NumPad.instance.Active(transmission.firewalls[transmission.firewalls.Count-1].difficulty, resultCallback);
     }
 
     private void Disable()
@@ -50,19 +48,17 @@ public class TransmissionUI : SerializedMonoBehaviour {
     private void AddFirewall(Firewall firewall)
     {
         var firewallUI = Instantiate(firewallPrefab, firewallHolder);
-        firewallUI.SetFirewall(firewall);
-        firewallUI.transform.SetParent(firewallHolder, false);
-        firewallUIs.Push(firewallUI);
-        firewallUI.gameObject.SetActive(true);
+            firewallUI.SetFirewall(firewall);
+            firewallUI.transform.SetParent(firewallHolder, false);
+            firewallUI.gameObject.SetActive(true);
+            firewallUI.name = string.Format("Firewall({0})", transmission.firewalls.IndexOf(firewall));
 
         firewallCountText.text = "" + transmission.firewalls.Count;
     }
 
-    private void HackFirewall()
+    private void HackFirewall(Firewall fire)
     {
-        Debug.Log("Hack Firewall");
-        Debug.Log(transmission.firewalls.Count);
-        var firewallUI = firewallUIs.Pop();
-        Destroy(firewallUI);
+        Destroy(FirewallUI.firewallUIs[fire].gameObject);
+        firewallCountText.text = "" + transmission.firewalls.Count;
     }
 }

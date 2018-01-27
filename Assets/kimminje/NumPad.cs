@@ -74,7 +74,6 @@ public class NumPad : StaticComponent<NumPad>
     public void OnClick(int index)
     {
         usernum = int.Parse(buttons[index].GetComponentInChildren<Text>().text);
-        Debug.Log(usernum);
         if (usernum == int.Parse(text[success].GetComponent<Text>().text) && hack == 1)
         {
             text[success].GetComponent<Text>().text = "0";

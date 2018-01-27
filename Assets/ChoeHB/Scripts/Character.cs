@@ -14,7 +14,7 @@ public class Character : SerializedMonoBehaviour {
     private Animation animation;
     private Transmission transmission;
 
-    private const float NEAR = 0.1f;
+    private const float NEAR = 0.01f;
 
     private void Awake()
     {
@@ -23,7 +23,6 @@ public class Character : SerializedMonoBehaviour {
 
     public void Transmission(Transmission transmission)
     {
-        Debug.Log("New " + transmission);
         this.transmission = transmission;
         CityUI src = CityUI.cityUIs[transmission.src];
         transform.position = src.transform.position;
@@ -58,7 +57,8 @@ public class Character : SerializedMonoBehaviour {
         // 다음 목적지가 방화벽일 때
         else
         {
-            dst = FirewallUI.firewallUIs[transmission.firewalls.Peek()].transform.position;
+            Firewall top = transmission.Top();
+            dst = FirewallUI.firewallUIs[top].transform.position;
 
             // 도착?
             if ((dst - src).sqrMagnitude < NEAR * NEAR)
