@@ -16,6 +16,8 @@ public class Character : SerializedMonoBehaviour {
 
     private const float NEAR = 0.01f;
 
+    private bool isDisabled;
+
     private void Awake()
     {
         animation = GetComponent<Animation>();
@@ -23,6 +25,7 @@ public class Character : SerializedMonoBehaviour {
 
     public void Transmission(Transmission transmission)
     {
+        isDisabled = false;
         gameObject.SetActive(true);
         this.transmission = transmission;
         transmission.dst.OnDestroy += VictoryAnimation;
@@ -33,7 +36,8 @@ public class Character : SerializedMonoBehaviour {
 
     private void Update()
     {
-        if (isVictoried)
+
+        if (isDisabled)
             return;
 
         Vector3 src = transform.position;
@@ -98,30 +102,31 @@ public class Character : SerializedMonoBehaviour {
     {
         animation.Play("Idle");
     }
-
-    private bool isVictoried;
+    
     private void Victory()
     {
-        if (isVictoried)
+        if (isDisabled)
             return;
-        
+        isDisabled = true;
         transmission.dst.DestroyCity();
         VictoryAnimation();
     }
     
     public void Interrupted()
     {
+        if (isDisabled)
+            return;
+        isDisabled = true;
         // 사망모션 이후 사라진다.
-        Debug.Log("Dead");
-        gameObject.SetActive(false);
+        Debug.Log("Interrupted");
+        Debug.Log(animation.Play("Dead"));
+        StartCoroutine(Disabling());
     }
 
     private void VictoryAnimation()
     {
         if (!gameObject.activeSelf)
             return;
-
-        isVictoried = true;
         animation.Play("Victory");
         SpriteRenderer[] spriteRenders = GetComponentsInChildren<SpriteRenderer>();
         StartCoroutine(Disabling());

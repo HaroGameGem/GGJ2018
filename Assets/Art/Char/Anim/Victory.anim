@@ -327,18 +327,6 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-<<<<<<< HEAD
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: root/Arrow
-    classID: 1
-=======
         value: 1
         inSlope: 0
         outSlope: 0
@@ -679,7 +667,6 @@ AnimationClip:
     attribute: m_Color.a
     path: root/body/img
     classID: 212
->>>>>>> a945c2d9f9b3d51a8d6eba4652fd264520eef7e6
     script: {fileID: 0}
   m_PPtrCurves: []
   m_SampleRate: 30
@@ -1976,22 +1963,6 @@ AnimationClip:
     attribute: m_Color.a
     path: root/body/img
     classID: 212
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_IsActive
-    path: root/Arrow
-    classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:

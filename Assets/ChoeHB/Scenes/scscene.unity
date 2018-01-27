@@ -353,6 +353,12 @@ Prefab:
       propertyPath: m_Name
       value: Yeosu
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -773,6 +779,12 @@ Prefab:
       propertyPath: m_Name
       value: Pyeongchang
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -1131,6 +1143,12 @@ Prefab:
       propertyPath: m_Name
       value: Daejeon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -1401,6 +1419,12 @@ Prefab:
       propertyPath: m_Name
       value: Daegu
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -2205,6 +2229,12 @@ Prefab:
       propertyPath: m_Name
       value: GwangJu
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -3208,6 +3238,12 @@ Prefab:
       propertyPath: m_Name
       value: Cheorwon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -3472,6 +3508,12 @@ Prefab:
       propertyPath: m_Name
       value: Chungju
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -4462,6 +4504,12 @@ Prefab:
       propertyPath: m_Name
       value: Pohang
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5022,6 +5070,12 @@ Prefab:
       propertyPath: m_Name
       value: Incheon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5346,6 +5400,12 @@ Prefab:
       propertyPath: m_Name
       value: Jeju
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5581,55 +5641,55 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.81
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+    - target: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
-    - target: {fileID: 1243146683747486, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 1623833442322426, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+    - target: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1298716104
 GameObject:
@@ -6445,6 +6505,17 @@ Prefab:
     - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
       propertyPath: m_Name
       value: Jeonju
+      objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
@@ -7369,6 +7440,12 @@ Prefab:
       propertyPath: m_Name
       value: Ulsan
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -7673,15 +7750,6 @@ Prefab:
       value: 
       objectReference: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
         type: 2}
-    - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
-        type: 2}
-      propertyPath: serializationData.SerializedFormat
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -8136,6 +8204,12 @@ Prefab:
       propertyPath: m_Name
       value: Busan
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -8554,6 +8628,12 @@ Prefab:
       propertyPath: m_Name
       value: Chuncheon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0

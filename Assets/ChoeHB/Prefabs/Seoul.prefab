@@ -183,7 +183,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   vaccine: {fileID: 114628290502110902}
-  characterPrefab: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+  characterPrefab: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
     type: 2}
   characterHolder: {fileID: 224298046819259794}
 --- !u!114 &114501574713689794
