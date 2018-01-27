@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
         {
             Debug.Log("Test");
 			yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
+			Debug.Log(optionCanvas);
 			optionCanvas = GameObject.Find("OptionCanvas");
             Debug.Log(optionCanvas);
 			popupExit = GameObject.Find("PopupExit");
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour {
 
     public void OnClickExitAccept()
     {
+        Time.timeScale = 1f;
         switch (gameState)
         {
             case eGameState.title:
@@ -198,6 +200,7 @@ public class GameManager : MonoBehaviour {
         yield return new WaitWhile(() => tween.IsPlaying());
         OnClickExitCancel();
         yield return SceneManager.LoadSceneAsync("TitleScene");
+		yield return SceneManager.UnloadSceneAsync("OptionScene");
 		FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}
 }

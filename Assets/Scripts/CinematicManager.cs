@@ -27,6 +27,9 @@ public class CinematicManager : MonoBehaviour {
     public Text textBox;
     bool isChatting = false;
 
+    public Text textTouch;
+    public string strCredit;
+
     public AudioSource keyClickSource;
 
     public float textIntervalSecond = 0.12f;
@@ -57,6 +60,7 @@ public class CinematicManager : MonoBehaviour {
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrPrologue[i]);
 			yield return new WaitWhile(() => isChatting);
 			yield return new WaitUntil(() => Input.GetMouseButton(0));
+            textTouch.gameObject.SetActive(false);
             FadeHelper.FadeOut(arrImgPrologue[i], 1f);
 		}
 
@@ -165,7 +169,18 @@ public class CinematicManager : MonoBehaviour {
         SceneManager.LoadSceneAsync("TitleScene");
 	}
 
+    [Button]
+    public void ShowCredit()
+    {
+        StartCoroutine(CoShowCredit());
+    }
 
+    IEnumerator CoShowCredit()
+    {
+        yield return null;
+		ChatText(textIntervalSecond, textVariabilitySecond, strCredit);
+
+	}
 
 
 	Coroutine routineChatText = null;
@@ -191,12 +206,12 @@ public class CinematicManager : MonoBehaviour {
             }
                 
             builder.Append(text[i]);
-            //사운드
             keyClickSource.pitch = Random.Range(0.8f, 1.3f);
             keyClickSource.PlayOneShot(keyClickSource.clip, Random.Range(0.8f, 1f));
             textBox.text = builder.ToString();
 			yield return new WaitForSeconds(intervalSecond + Random.Range(-variabilitySecond / 2f, variabilitySecond / 2f));
 		}
+        textTouch.gameObject.SetActive(true);
         isChatting = false;
     }
 
