@@ -87,6 +87,8 @@ public class NumPad : StaticComponent<NumPad>
         Text successText = text[success];
         if (successText.text == " ")
             return;
+
+        AudioManager.PlaySound("Typing");
         if (usernum == int.Parse(successText.text) && hack == 1)
         {
             var seq = DOTween.Sequence();
