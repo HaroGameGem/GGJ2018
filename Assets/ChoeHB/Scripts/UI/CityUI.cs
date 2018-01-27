@@ -64,6 +64,7 @@ public class CityUI : SerializedMonoBehaviour {
     public void Click()
     {
         ZoomIn();
+        NumPad.instance.Float();
         if (OnClick != null)
             OnClick(city);
     }
@@ -117,7 +118,7 @@ public class CityUI : SerializedMonoBehaviour {
 
     private void ZoomIn()
     {
-        CityZoomer.instance.Zoom(transform.position);
+        CityZoomer.instance.ZoomIn(transform.position);
     }
 
     public static void StartHack()
