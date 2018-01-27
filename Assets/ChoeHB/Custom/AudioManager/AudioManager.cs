@@ -86,6 +86,7 @@ public class AudioManager : SingletonAsComponent<AudioManager>
 
     public static void PlayMusic(AudioClip clip)
     {
+        Debug.Log("Play Music " + clip.name);
         instance.music.clip = clip;
         instance.music.Play();
     }

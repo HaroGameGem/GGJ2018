@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour {
@@ -19,5 +20,20 @@ public class ResultUI : MonoBehaviour {
 
         gameObject.SetActive(true);
         animation.Play(result.isCleard ? "Result_Clear" : "Result_Fail");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void Title()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void Ending()
+    {
+        Debug.Log("Ending");
     }
 }

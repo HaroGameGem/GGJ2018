@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour {
 
     public eGameState gameState = eGameState.title;
     CinematicManager cinematicManager = null;
-    GameObject optionCanvas;
-    GameObject popupExit;
+    public GameObject optionCanvas;
+    public GameObject popupExit;
 
     public Image imgBlackBoard;
 
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoInit()
     {
+<<<<<<< HEAD
         if(optionCanvas == null)
         {
             Debug.Log("Test");
@@ -51,6 +52,15 @@ public class GameManager : MonoBehaviour {
 			GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
 			popupExit.gameObject.SetActive(false);
 		}
+=======
+		yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
+        optionCanvas = GameObject.Find("OptionCanvas");
+        popupExit = GameObject.Find("PopupExit");
+        imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
+        GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
+        GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
+		popupExit.gameObject.SetActive(false);
+>>>>>>> 0a2e9edcaf4bc5b080d4952c9480de1cccf6e898
 		yield return new WaitForSeconds(0.5f);
         FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}

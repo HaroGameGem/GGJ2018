@@ -9,6 +9,9 @@ using UnityEngine.UI;
 [Serializable]
 public class City {
 
+    public static event Action<City> OnStaticRecovery;
+    public static event Action<City> OnStaticDestroy;
+
     public event Action OnRecovery;
     public event Action OnDestroy;
 
@@ -67,6 +70,9 @@ public class City {
 
         if (OnDestroy != null)
             OnDestroy();
+
+        if (OnStaticDestroy != null)
+            OnStaticDestroy(this);
     }
 
     // 도시가 복구되면
@@ -77,6 +83,9 @@ public class City {
 
         if (OnRecovery != null)
             OnRecovery();
+
+        if (OnStaticRecovery != null)
+            OnStaticRecovery(this);
     }
 
 

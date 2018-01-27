@@ -21,6 +21,8 @@ public class WorldMap : StaticComponent<WorldMap> {
     // RoadData에서 사용
     public static string[] cityNames    { get { return instance.cityDatas.Select(city => city.name).ToArray(); } }
 
+    public event Action OnInitialize;
+
     [Header("Data")]
     [SerializeField] VaccineOccurData vaccineOccurData;     // 백신 발생에 대한 정보
     [SerializeField] int m_deadline;                          // 게임 타이머
@@ -29,6 +31,7 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     [Header("Component")]
     [SerializeField] GameObject readyUI;
+    [SerializeField] Animation warningUI;
     [SerializeField] ResultUI resultUI;
 
     [SerializeField] Alarm alarm;
@@ -143,9 +146,11 @@ public class WorldMap : StaticComponent<WorldMap> {
         InitializeRoads();
         DrawRoads();
         state = State.SelectingCity;
-
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick += StartCity;
+
+        if (OnInitialize != null)
+            OnInitialize();
     }
 
     public void StartCity(City city)
@@ -182,6 +187,11 @@ public class WorldMap : StaticComponent<WorldMap> {
             result.citys = destroyedCitys;
             result.isCleard = isWin;
             result.time = timer.ToString();
+
+        AudioManager.PlaySound(isWin ? "Win" : "Lose");
+
+        StopAllCoroutines();
+
         resultUI.Float(result);
     }
 
@@ -196,6 +206,7 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     private IEnumerator VaccineOccuring()
     {
+        HashSet<City> occureds = new HashSet<City>();
         while (true)
         {
             yield return new WaitForSeconds(vaccineOccurData.occurInterval);
@@ -203,20 +214,35 @@ public class WorldMap : StaticComponent<WorldMap> {
             while (TransmissionUI.isTryingHack)
                 yield return new WaitForEndOfFrame();
 
-            IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed);
+            IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed && !city.isStaringCity);
             float occurRate = vaccineOccurData.GetOccurRate(destroyedCitys.Count());
 
+            occureds.Clear();
             foreach (var destroyedCity in destroyedCitys)
-            {
-                if (destroyedCity.isStaringCity)
-                    continue;
-
-                // 백신 발생
                 if (Random.Range(0, 1f) < occurRate)
-                {
-                    cityUIs[destroyedCity].OccurVaccine();
-                }
+                    occureds.Add(destroyedCity);
+
+            // 발생할 백신이 있다면
+            if(occureds.Count != 0)
+            {
+                // 사운드D
+                AudioManager.PlaySound("Vaccine");
+
+                // Warning UI
+                warningUI.gameObject.SetActive(true);
+                warningUI.Play("Warning");
+                float playingTime = warningUI.clip.length;
+                yield return new WaitForSeconds(playingTime);
+                warningUI.gameObject.SetActive(false);
+
+                // 줌아웃
+                CityZoomer.instance.ZoomOut();
+
+                foreach (var occured in occureds)
+                    cityUIs[occured].OccurVaccine();
+
             }
+                
         }
     }
 
