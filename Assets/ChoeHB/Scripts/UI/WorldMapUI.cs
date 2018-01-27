@@ -48,5 +48,10 @@ public class WorldMapUI : MonoBehaviour {
             yield return new WaitForSeconds(blinkInterval);
         }
     }
+
+    public void Deselect()
+    {
+        CityZoomer.instance.ZoomOut();
+    }
 }
 

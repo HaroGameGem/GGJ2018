@@ -21,8 +21,6 @@ public class Transmission {
 
     public bool isActived { get; private set; }
 
-    private const int MIN_FIREWALL_COUNT = 4;
-
     public Transmission(City src, City dst, List<Firewall> firewalls)
     {
         this.src            = src;

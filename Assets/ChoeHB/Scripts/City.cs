@@ -65,7 +65,6 @@ public class City {
         // 나를 향하고 있는 Transmission들을 파괴한다.
         FromTransmissions().ForEach(tr => tr.SuccessDestroy());
 
-        Debug.Log("Destroy " + name);
         if (OnDestroy != null)
             OnDestroy();
     }

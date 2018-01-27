@@ -18,8 +18,7 @@ public class CityZoomer : StaticComponent<CityZoomer> {
         originZoomSize = Camera.main.orthographicSize;
     }
 
-    
-    public void Zoom(Vector2 dst)
+    public void ZoomIn(Vector2 dst)
     {
         var camera = Camera.main;
 
@@ -28,10 +27,11 @@ public class CityZoomer : StaticComponent<CityZoomer> {
 
         // Zoom Position
 
-        Vector3 dstZ = dst;
+        Vector3 dstZ = dst + position;
             dstZ.z = camera.transform.position.z;
 
         camera.transform.DOMove(dstZ, zoomDuration);
+        NumPad.instance.Float();
     }
 
     public void ZoomOut()
@@ -44,14 +44,9 @@ public class CityZoomer : StaticComponent<CityZoomer> {
         // Zoom Position
         Vector3 dst = Vector3.zero;
             dst.z = -10;
-
         camera.transform.DOMove(dst, zoomDuration);
+        NumPad.instance.Close();
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            ZoomOut();
-    }
 }

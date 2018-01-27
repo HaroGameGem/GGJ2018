@@ -47,11 +47,20 @@ public class TransmissionUI : SerializedMonoBehaviour {
             string audioName = result ? "HackSuccess" : "HackFail";
             AudioManager.PlaySound(audioName);
             isTryingHack = false;
+            CityZoomer.instance.ZoomOut();
             transmission.TryHack(result);
         };
 
+        CityUI dst = CityUI.cityUIs[transmission.dst];
+        CityZoomer.instance.ZoomIn(dst.transform.position);
+
         NumPad.instance.Float();
-        NumPad.instance.Active(transmission.firewalls[transmission.firewalls.Count - 1].difficulty, resultCallback);
+
+        List<Firewall> firewalls = transmission.firewalls;
+        if (firewalls.Count == 0)
+            return;
+
+        NumPad.instance.Active(firewalls[firewalls.Count - 1].difficulty, resultCallback);
     }
 
     private void AddFirewall(Firewall firewall)

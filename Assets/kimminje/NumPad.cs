@@ -26,7 +26,7 @@ public class NumPad : StaticComponent<NumPad>
 
     private void Awake()
     {
-        End();
+        Close();
     }
 
     // Update is called once per frame
@@ -46,13 +46,13 @@ public class NumPad : StaticComponent<NumPad>
         if (success >= numcnt && (deadline - timecount) >= 0)
         {
             resultCallback(true);
-            End();
+            Close();
         }
         //실패했을때
         else if ((deadline - timecount) < 0)
         {
             resultCallback(false);
-            End();
+            Close();
         }
 
     }
@@ -85,6 +85,8 @@ public class NumPad : StaticComponent<NumPad>
     {
         usernum = int.Parse(buttons[index].GetComponentInChildren<Text>().text);
         Text successText = text[success];
+        if (successText.text == " ")
+            return;
         if (usernum == int.Parse(successText.text) && hack == 1)
         {
             var seq = DOTween.Sequence();
@@ -103,7 +105,7 @@ public class NumPad : StaticComponent<NumPad>
         else
         {
             resultCallback(false);
-            End();
+            Close();
         }
     }
 
@@ -137,14 +139,14 @@ public class NumPad : StaticComponent<NumPad>
     }
 
     //끝났을때 다 없애기
-    void End()
+    public void Close()
     {
         numPad.gameObject.SetActive(false);
+        text.ForEach(t => t.text = " ");
         resultCallback = null;
         hack = 0;
         timecount = 0;
         image.fillAmount = 1;
         success = 0;
-
     }
 }
