@@ -10,7 +10,13 @@ using System.Linq;
 
 public class CityUI : SerializedMonoBehaviour {
 
-    public static bool isStarted;
+    public enum State
+    {
+        Selecting, Started
+    }
+
+    private static State state = State.Selecting;
+
     public static Dictionary<City, CityUI> cityUIs { get; private set; }
 
     [SerializeField] Character characterPrefab;
@@ -21,6 +27,8 @@ public class CityUI : SerializedMonoBehaviour {
     private Button button;
     private City city;
 
+    
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -28,9 +36,12 @@ public class CityUI : SerializedMonoBehaviour {
 
     private void Update()
     {
-        if (!isStarted)
-            return;
-        button.interactable = city.isHacked;
+        if (state == State.Selecting)
+            button.interactable = city.canStart;
+
+        if (state == State.Started)
+            button.interactable = city.isDestroied;
+        
     }
 
     public void SetCity(City city)
@@ -61,7 +72,6 @@ public class CityUI : SerializedMonoBehaviour {
         }
     }
 
-
     private void ZoomIn()
     {
         CityZoomer.ZoomIn(this);
@@ -69,6 +79,6 @@ public class CityUI : SerializedMonoBehaviour {
 
     public static void StartHack()
     {
-        isStarted = true;
+        state = State.Started;
     }
 }

@@ -20,4 +20,9 @@ public class IntRange {
     {
         return UnityEngine.Random.Range(min, max + 1);
     }
+
+    public static implicit operator int(IntRange range)
+    {
+        return range.Random();
+    }
 }

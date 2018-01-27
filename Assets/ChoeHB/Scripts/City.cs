@@ -12,15 +12,20 @@ public class City {
     public event Action OnDestroy;
 
     public readonly string name;
+    public readonly bool canStart;
+    public readonly int income;
+
     private readonly Dictionary<City, Transmission> transmissions;
     private readonly IntRange firewallCount; // 벽 갯수
     private readonly IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
 
-    public bool isHacked { get; private set; }
+    public bool isDestroied { get; private set; }
 
     public City(CityData cityData)
     {
         name            = cityData.name;
+        canStart        = cityData.canStart;
+        income          = cityData.income;
         firewallCount   = cityData.fireWallCount;
         difficulty      = cityData.difficulty;
 
@@ -29,20 +34,22 @@ public class City {
 
     public void StartingCity()
     {
+        if (!canStart)
+            throw new Exception("Can't Start " + name);
         DestroyCity();
     }
 
     // 도시가 파괴되면
     public void DestroyCity()
     {
-        isHacked = true;
+        isDestroied = true;
 
         // 인접한 도시가 
         foreach (var nearCity in transmissions.Keys)
         {
 
             // 해킹되지 않았으면 내가 향할 Transmission들을 활성화하고
-            if (!nearCity.isHacked)
+            if (!nearCity.isDestroied)
             {
                 Transmission to = transmissions[nearCity];
                 to.Active();
@@ -78,10 +85,10 @@ public class City {
     private static Transmission AddTransmission(City src, City dst)
     {
         List<Firewall> firewalls = new List<Firewall>();
-        int firewallCount = dst.firewallCount.Random();
+        int firewallCount = dst.firewallCount;
         for (int i = 0; i < firewallCount; i++)
         {
-            int difficulty = dst.difficulty.Random();
+            int difficulty = dst.difficulty;
             Firewall firewall = new Firewall(difficulty);
             firewalls.Add(firewall);
         }

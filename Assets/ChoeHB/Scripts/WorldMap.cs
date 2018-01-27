@@ -11,22 +11,33 @@ public class WorldMap : StaticComponent<WorldMap> {
     // RoadData에서 사용
     public static string[] cityNames    { get { return instance.cityDatas.Select(city => city.name).ToArray(); } }
 
-    [TabGroup("City")] [TableList] [SerializeField] List<CityData> cityDatas;
-    [TabGroup("Road")] [TableList] [SerializeField] List<RoadData> roadDatas;
+    [Header("Data")]
+    [SerializeField] int deadline;              // 게임 타이머
+    [SerializeField] float incomeInterval;      // 인컴이 오르는 주기
+    [SerializeField] Progress m_credit;         // 현재 화폐 / 목표화폐
 
-    [ValueDropdown("GetCityNames")]
-    [SerializeField] string dstCityName;
-
+    [Header("Component")]
+    [SerializeField] Alarm alarm;
     [SerializeField] Canvas canvas;
     [SerializeField] RoadUI roadUIPrafab;
     [SerializeField] Transform roadHolder;
 
-    // 도시마다 다른 도시에 연결되어 있고 연결마다 방화벽이 n개 있다.
-    private City dstCity;
+    [TabGroup("City")] [TableList] [SerializeField] List<CityData> cityDatas;
+    [TabGroup("Road")] [TableList] [SerializeField] List<RoadData> roadDatas;
+
+    public bool isStarted                       { get; private set; }
+    public Dictionary<City, CityUI> cityUIs     { get; private set; }
+    public Timer timer                          { get; private set; }
+    public Progress credit
+    {
+        get { return m_credit; }
+        private set { m_credit = value; }
+    }
+
+    public Progress destroyedCitys { get; private set; }
+
     private List<Road> roads;
     private Dictionary<string, City> citys;
-
-    public Dictionary<City, CityUI> cityUIs { get; private set; }
 
 
     private void Start()
@@ -39,10 +50,12 @@ public class WorldMap : StaticComponent<WorldMap> {
         // 도시들 초기화
         citys = new Dictionary<string, City>();
         cityUIs = new Dictionary<City, CityUI>();
+        destroyedCitys = new Progress(cityDatas.Count);
         foreach (var cityData in cityDatas)
         {
             string name = cityData.name;
             City city = new City(cityData);
+            city.OnDestroy += OnDestroyCity;
             citys.Add(name, city);
 
             CityUI cityUI = cityData.cityUI;
@@ -107,29 +120,39 @@ public class WorldMap : StaticComponent<WorldMap> {
         InitializeRoads();
         DrawRoads();
 
-        // 시작지점 설정
-        dstCity = citys[dstCityName];
-        dstCity.OnDestroy += GameClear;
-
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick += StartCity;
     }
 
     public void StartCity(City city)
     {
-        if (city == dstCity)
+        if (!city.canStart)
             return;
 
+        if (isStarted)
+            throw new Exception("Already Started");
+
+        timer = new Timer(deadline);
+        isStarted = true;
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick -= StartCity;
 
         city.StartingCity();
         CityUI.StartHack();
+        alarm.StartAlert(incomeInterval, Income);
     }
 
-    private string[] GetCityNames()
+    private void Income()
     {
-        return cityNames;
+        int sum = (from city in citys.Values where city.isDestroied select city.income).Sum();
+        credit += sum;
+        if (credit.isSuccessed)
+            GameClear();
+    }
+
+    private void OnDestroyCity()
+    {
+        destroyedCitys++;
     }
 
     public void GameClear()

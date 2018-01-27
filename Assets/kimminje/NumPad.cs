@@ -10,7 +10,8 @@ public class NumPad : StaticComponent<NumPad>
     System.Random random = new System.Random();
     public Text[] text;
 
-    public GameObject deadline;
+    public GameObject numPad;
+
     public Image image;
     public Image Pad;
 
@@ -19,9 +20,7 @@ public class NumPad : StaticComponent<NumPad>
 
     private void Awake()
     {
-        deadline.gameObject.SetActive(false);
-        image.gameObject.SetActive(false);
-        Pad.gameObject.SetActive(false);
+        End();
     }
 
     // Update is called once per frame
@@ -57,7 +56,8 @@ public class NumPad : StaticComponent<NumPad>
         int filled = 0;
         while (filled < 9)
         {
-            int check = 0, n = random.Next(1, 10);
+            int check = 0;
+            int n = random.Next(1, 10);
             for (int i = 0; i < filled; i++)
             {
                 if (buttons[i].GetComponentInChildren<Text>().text == n.ToString())
@@ -79,7 +79,7 @@ public class NumPad : StaticComponent<NumPad>
         usernum = int.Parse(buttons[index].GetComponentInChildren<Text>().text);
         if (usernum == int.Parse(text[success].GetComponent<Text>().text) && hack == 1)
         {
-            text[success].GetComponent<Text>().text = "0";
+            text[success].GetComponent<Text>().text = " ";
             success++;
         }
         else
@@ -94,10 +94,9 @@ public class NumPad : StaticComponent<NumPad>
     //패드가 나옴
     public void Float()
     {
-        deadline.gameObject.SetActive(true);
-        image.gameObject.SetActive(true);
-        Pad.gameObject.SetActive(true);
+        numPad.gameObject.SetActive(true);
     }
+
 
     //해킹을 시작할때 
     public void Active(int numCount, Action<bool> resultCallback)
@@ -107,10 +106,12 @@ public class NumPad : StaticComponent<NumPad>
         int[] PinNum = new int[numCount];
 
         //해킹할 번호 보여주기
+        text.ForEach(t => t.gameObject.SetActive(false));
+
         for (int i = 0; i < numCount; i++)
         {
+            text[i].gameObject.SetActive(true);
             PinNum[i] = random.Next(1, 9);
-            text[i].rectTransform.localPosition = new Vector2(-numCount * 135 / 2 + i * 135 + (float)+67.5, 0);
             text[i].GetComponent<Text>().text = PinNum[i].ToString();
         }
         numcnt = numCount;
@@ -120,14 +121,7 @@ public class NumPad : StaticComponent<NumPad>
     //끝났을때 다 없애기
     void End()
     {
-        deadline.gameObject.SetActive(false);
-        image.gameObject.SetActive(false);
-        Pad.gameObject.SetActive(false);
-
-        for (int i = 0; i < numcnt; i++)
-        {
-            text[i].rectTransform.localPosition = new Vector2(900, 0);
-        }
+        numPad.gameObject.SetActive(false);
         resultCallback = null;
         hack = 0;
         timecount = 0;
