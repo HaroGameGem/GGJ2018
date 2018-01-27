@@ -38,7 +38,6 @@ public class Character : SerializedMonoBehaviour {
     {
         if (isDisabled)
             return;
-        Debug.Log("AS");
         Vector3 src = transform.position;
 
         var firewalls = transmission.firewalls;

@@ -11,8 +11,9 @@ using Random = UnityEngine.Random;
 public struct GameResult
 {
     public bool isCleard;
+    public string time;
     public Progress credit;
-    //public Predicate 
+    public Progress citys;
 }
 
 public class WorldMap : StaticComponent<WorldMap> {
@@ -27,6 +28,9 @@ public class WorldMap : StaticComponent<WorldMap> {
     [SerializeField] Progress m_credit;                     // 현재 화폐 / 목표화폐
 
     [Header("Component")]
+    [SerializeField] GameObject readyUI;
+    [SerializeField] ResultUI resultUI;
+
     [SerializeField] Alarm alarm;
     [SerializeField] Canvas canvas;
     [SerializeField] RoadUI roadUIPrafab;
@@ -56,11 +60,11 @@ public class WorldMap : StaticComponent<WorldMap> {
     private List<Road> roads;
     private Dictionary<string, City> citys;
 
-
     private void Start()
     {
         string bgmName = "BGM" + UnityEngine.Random.Range(1, 3); ;
         AudioManager.PlayMusic(bgmName);
+        readyUI.gameObject.SetActive(true);
         Initialize();
     }
 
@@ -167,8 +171,18 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     private void GameEnd()
     {
-        bool isWin = credit.isSuccessed;
+        if (state == State.End)
+            return;
 
+        state = State.End;
+        timer.Stop();
+        bool isWin = credit.isSuccessed;
+        GameResult result = new GameResult();
+            result.credit = credit;
+            result.citys = destroyedCitys;
+            result.isCleard = isWin;
+            result.time = timer.ToString();
+        resultUI.Float(result);
     }
 
     private void Income()
@@ -177,7 +191,7 @@ public class WorldMap : StaticComponent<WorldMap> {
         credit += sum;
 
         if (credit.isSuccessed)
-            GameClear();
+            GameEnd();
     }
 
     private IEnumerator VaccineOccuring()
@@ -187,9 +201,12 @@ public class WorldMap : StaticComponent<WorldMap> {
             yield return new WaitForSeconds(vaccineOccurData.occurInterval);
             IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed);
             float occurRate = vaccineOccurData.GetOccurRate(destroyedCitys.Count());
-            Debug.Log("Vaccine Occuring "+occurRate);
+
             foreach (var destroyedCity in destroyedCitys)
             {
+                if (destroyedCity.isStaringCity)
+                    continue;
+
                 // 백신 발생
                 if (Random.Range(0, 1f) < occurRate)
                 {
@@ -204,10 +221,13 @@ public class WorldMap : StaticComponent<WorldMap> {
         destroyedCitys++;
     }
 
-    public void GameClear()
+    private void Update()
     {
-        AudioManager.StopMusic();
-        AudioManager.PlaySound("Win");
+        if (state == State.Playing)
+        {
+            if (timer.remain == 0)
+                GameEnd();
+        }
     }
-    
+
 }

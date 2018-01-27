@@ -41,7 +41,7 @@ public class CityUI : SerializedMonoBehaviour {
             button.interactable = city.canStart;
 
         if (state == State.Started)
-            button.interactable = city.isDestroyed;
+            button.interactable = !city.isDestroyed;
 
     }
 
@@ -117,7 +117,7 @@ public class CityUI : SerializedMonoBehaviour {
 
     private void ZoomIn()
     {
-        CityZoomer.ZoomIn(this);
+        CityZoomer.instance.Zoom(transform.position);
     }
 
     public static void StartHack()

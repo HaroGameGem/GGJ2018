@@ -22,6 +22,7 @@ public class City {
     private readonly IntRange firewallCount; // 벽 갯수
 
     public bool isDestroyed { get; private set; }
+    public bool isStaringCity { get; private set; }
 
     public City(CityData cityData)
     {
@@ -38,6 +39,7 @@ public class City {
     {
         if (!canStart)
             throw new Exception("Can't Start " + name);
+        isStaringCity = true;
         DestroyCity();
     }
 
