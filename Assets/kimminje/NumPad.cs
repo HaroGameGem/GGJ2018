@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,20 @@ using UnityEngine.UI;
 
 public class NumPad : StaticComponent<NumPad>
 {
-    public Button[] buttons;
+    [SerializeField] float deadline;
+
     System.Random random = new System.Random();
-    public Text[] text;
 
     public GameObject numPad;
 
     public Image image;
     public Image Pad;
 
+    public float fadingTime;
+
+    public Text[] text;
+    public Button[] buttons;
+    
     int usernum = 0, hack = 0, numcnt = 0, success = 0, clicked = 0;
     float timecount = 0.0f;
 
@@ -29,20 +35,21 @@ public class NumPad : StaticComponent<NumPad>
         //지금 해킹중이면 시간체크
         if (hack == 1)
         {
-            image.fillAmount -= timecount / 360;
+            image.fillAmount = 1 - (timecount / deadline);
             timecount += Time.deltaTime;
         }
         // 실패하거나 성공했을때
         if (resultCallback == null)
             return;
+
         //성공했을때
-        if (success >= numcnt && (5 - timecount) >= 0)
+        if (success >= numcnt && (deadline - timecount) >= 0)
         {
             resultCallback(true);
             End();
         }
         //실패했을때
-        else if ((5 - timecount) < 0)
+        else if ((deadline - timecount) < 0)
         {
             resultCallback(false);
             End();
@@ -77,9 +84,20 @@ public class NumPad : StaticComponent<NumPad>
     public void OnClick(int index)
     {
         usernum = int.Parse(buttons[index].GetComponentInChildren<Text>().text);
-        if (usernum == int.Parse(text[success].GetComponent<Text>().text) && hack == 1)
+        Text successText = text[success];
+        if (usernum == int.Parse(successText.text) && hack == 1)
         {
-            text[success].GetComponent<Text>().text = " ";
+            var seq = DOTween.Sequence();
+                seq.Append(successText.DOFade(0, fadingTime));
+
+            seq.OnComplete(() =>
+            {
+                successText.text = " ";
+                successText.DOFade(1, 0);
+            });
+
+            // origin
+            // text[success].GetComponent<Text>().text = " ";
             success++;
         }
         else
@@ -112,7 +130,7 @@ public class NumPad : StaticComponent<NumPad>
         {
             text[i].gameObject.SetActive(true);
             PinNum[i] = random.Next(1, 9);
-            text[i].GetComponent<Text>().text = PinNum[i].ToString();
+            text[i].text = PinNum[i].ToString();
         }
         numcnt = numCount;
         this.resultCallback = resultCallback;

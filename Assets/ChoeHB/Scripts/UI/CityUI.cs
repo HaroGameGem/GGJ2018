@@ -27,8 +27,6 @@ public class CityUI : SerializedMonoBehaviour {
     private Button button;
     private City city;
 
-    
-
     private void Awake()
     {
         button = GetComponent<Button>();
