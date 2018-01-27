@@ -19,7 +19,6 @@ public class FirewallUI : MonoBehaviour {
         firewall.OnUpdateDifficulty += UpdateColor;
         firewallUIs = firewallUIs ?? new Dictionary<Firewall, FirewallUI>();
         firewallUIs.Add(firewall, this);
-
         UpdateColor();
     }
 

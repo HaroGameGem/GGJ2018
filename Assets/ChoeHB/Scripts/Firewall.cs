@@ -11,13 +11,15 @@ public class Firewall {
 
     public event Action OnUpdateDifficulty;
 
+    private const int MIN_DIFFICULTY = 4;
+
     private int difficulty_;
     public int difficulty
     {
         get { return difficulty_; }
         set
         {
-            difficulty_ = value;
+            difficulty_ = Mathf.Max(MIN_DIFFICULTY, value);
             if (OnUpdateDifficulty != null)
                 OnUpdateDifficulty();
         }
