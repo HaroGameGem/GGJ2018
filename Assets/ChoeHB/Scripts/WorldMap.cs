@@ -8,6 +8,13 @@ using UnityEngine.UI;
 
 using Random = UnityEngine.Random;
 
+public struct GameResult
+{
+    public bool isCleard;
+    public Progress credit;
+    //public Predicate 
+}
+
 public class WorldMap : StaticComponent<WorldMap> {
 
     // RoadData에서 사용
@@ -15,7 +22,7 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     [Header("Data")]
     [SerializeField] VaccineOccurData vaccineOccurData;     // 백신 발생에 대한 정보
-    [SerializeField] int deadline;                          // 게임 타이머
+    [SerializeField] int m_deadline;                          // 게임 타이머
     [SerializeField] float incomeInterval;                  // 인컴이 오르는 주기
     [SerializeField] Progress m_credit;                     // 현재 화폐 / 목표화폐
 
@@ -28,7 +35,14 @@ public class WorldMap : StaticComponent<WorldMap> {
     [TabGroup("City")] [TableList] [SerializeField] List<CityData> cityDatas;
     [TabGroup("Road")] [TableList] [SerializeField] List<RoadData> roadDatas;
 
-    public bool isStarted                       { get; private set; }
+    public enum State
+    {
+        SelectingCity, Playing, End
+    }
+
+    public State state { get; private set; }
+
+    public int deadline                         { get { return m_deadline; } }
     public Dictionary<City, CityUI> cityUIs     { get; private set; }
     public Timer timer                          { get; private set; }
     public Progress credit
@@ -124,6 +138,7 @@ public class WorldMap : StaticComponent<WorldMap> {
         InitializeCitys();
         InitializeRoads();
         DrawRoads();
+        state = State.SelectingCity;
 
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick += StartCity;
@@ -134,11 +149,12 @@ public class WorldMap : StaticComponent<WorldMap> {
         if (!city.canStart)
             return;
 
-        if (isStarted)
+        if (state != State.SelectingCity)
             throw new Exception("Already Started");
 
+        state = State.Playing;
+
         timer = new Timer(deadline);
-        isStarted = true;
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick -= StartCity;
 
@@ -147,6 +163,12 @@ public class WorldMap : StaticComponent<WorldMap> {
         alarm.StartAlert(incomeInterval, Income);
 
         StartCoroutine(VaccineOccuring());
+    }
+
+    private void GameEnd()
+    {
+        bool isWin = credit.isSuccessed;
+
     }
 
     private void Income()

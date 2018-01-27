@@ -56,8 +56,8 @@ public class CityUI : SerializedMonoBehaviour {
         vaccine.SetCity(city);
         cityUIs = cityUIs ?? new Dictionary<City, CityUI>();
         cityUIs.Add(city, this);
-        city.OnDestroy += Transmission;
-        city.OnRecovery += InterruptTransmission;
+        city.OnDestroy += RunAll;
+        city.OnRecovery += Recovery;
     }
     
 
@@ -69,31 +69,50 @@ public class CityUI : SerializedMonoBehaviour {
     }
 
     // 캐릭터들을 보냄
-    public void Transmission()
+    public void RunAll()
+    {
+        foreach (var transmission in city.GetActivedTransmission())
+            Run(transmission);
+    }
+
+    public void Run(Transmission transmission)
     {
         if (characters == null)
         {
             characters = new Dictionary<Transmission, Character>();
             foreach (var nearCity in city.transmissions.Keys)
             {
-                Transmission transmission = city.transmissions[nearCity];
-                Character character = Instantiate(characterPrefab);
-                character.gameObject.SetActive(false);
-                characters.Add(transmission, character);
+                Transmission instancedTransmission = city.transmissions[nearCity];
+                Character instancedCharacter = Instantiate(characterPrefab);
+                instancedCharacter.gameObject.SetActive(false);
+                characters.Add(instancedTransmission, instancedCharacter);
             }
         }
 
-        foreach (var transmission in city.GetActivedTransmission())
+        CityUI target = cityUIs[transmission.dst];
+        if(!characters.ContainsKey(transmission))
         {
-            CityUI target = cityUIs[transmission.dst];
-            Character character = characters[transmission];
-                character.Transmission(transmission);
+            Debug.Log("@ " + transmission);
+            characters.Keys.ForEach(Debug.Log);
         }
+
+        Character character = characters[transmission];
+        character.Transmission(transmission);
     }
 
-    private void InterruptTransmission()
+    private void Recovery()
     {
+        // 나가고 있던 애들은 죽고
         city.GetActivedTransmission().Select(tr => characters[tr]).ForEach(ch => ch.Interrupted());
+
+        // 인접한 곳 중에서 파괴되지 않은 곳은 나에게 보낸다.
+        foreach(var transmission in city.FromTransmissions())
+        {
+            if (!transmission.src.isDestroyed)
+                continue;
+            cityUIs[transmission.src].Run(transmission);
+        }
+        //city.FromTransmissions().Where( .ForEach(tr => cityUIs[tr.dst].Run(tr));
     }
 
     private void ZoomIn()

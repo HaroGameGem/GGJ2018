@@ -84,7 +84,7 @@ public class City {
         return transmissions.Values.Where(tr => tr.isActived);
     }
 
-    private IEnumerable<Transmission> FromTransmissions()
+    public IEnumerable<Transmission> FromTransmissions()
     {
         foreach(var nearCity in transmissions.Keys)
             yield return nearCity.transmissions[this];

@@ -60,7 +60,10 @@ public class Transmission {
     // 점령당함
     public void SuccessDestroy()
     {
-        firewalls.Clear();
+        int firewallsCount = firewalls.Count;
+        for (int i = 0; i < firewallsCount; i++)
+            SuccessHack();
+
         isActived = false;
         
         if (OnSuccessDestroy != null)
@@ -75,9 +78,6 @@ public class Transmission {
 
         if (OnSuccessHack != null)
             OnSuccessHack(top);
-
-        //if (firewalls.Count == 0)
-        //    dst.DestroyCity();
     }
 
     private void FailHack()

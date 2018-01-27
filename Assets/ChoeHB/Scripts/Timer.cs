@@ -22,4 +22,9 @@ public class Timer {
         startTime = Time.time;
     }
 
+    public void Stop()
+    {
+
+    }
+
 }

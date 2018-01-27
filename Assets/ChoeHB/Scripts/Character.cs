@@ -36,10 +36,9 @@ public class Character : SerializedMonoBehaviour {
 
     private void Update()
     {
-
         if (isDisabled)
             return;
-
+        Debug.Log("AS");
         Vector3 src = transform.position;
 
         var firewalls = transmission.firewalls;
@@ -117,9 +116,7 @@ public class Character : SerializedMonoBehaviour {
         if (isDisabled)
             return;
         isDisabled = true;
-        // 사망모션 이후 사라진다.
-        Debug.Log("Interrupted");
-        Debug.Log(animation.Play("Dead"));
+        animation.Play("Dead");
         StartCoroutine(Disabling());
     }
 
@@ -128,7 +125,6 @@ public class Character : SerializedMonoBehaviour {
         if (!gameObject.activeSelf)
             return;
         animation.Play("Victory");
-        SpriteRenderer[] spriteRenders = GetComponentsInChildren<SpriteRenderer>();
         StartCoroutine(Disabling());
     }
 

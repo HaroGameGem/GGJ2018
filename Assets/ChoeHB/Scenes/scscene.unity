@@ -444,7 +444,7 @@ MonoBehaviour:
     occurInterval: 7
     defaultOccurRate: 0.3
     occurRatePerCity: 0.02
-  deadline: 300
+  m_deadline: 300
   incomeInterval: 3
   m_credit:
     dst: 10
@@ -1425,6 +1425,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -4510,6 +4515,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5687,6 +5697,50 @@ Prefab:
         type: 2}
       propertyPath: serializationData.SerializedFormat
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258504684727608, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.182
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416894280395296, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -44.210003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939046356098968, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -30.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873307676181288, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 46.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073449572540016, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 4.7380004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108561235974158, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -25.90408
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345100178342160, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 58.59258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420967423222694, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -34.8204
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465748306199700, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -24.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944208327431162, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453944304896692, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.597
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
