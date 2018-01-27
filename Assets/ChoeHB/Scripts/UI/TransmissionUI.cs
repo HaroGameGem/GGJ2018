@@ -24,7 +24,6 @@ public class TransmissionUI : SerializedMonoBehaviour {
         foreach (var firewall in transmission.firewalls)
             AddFirewall(firewall);
 
-        transmission.OnSuccessDestroy       += Disable;
         transmission.OnSuccessHack          += HackFirewall;
         transmission.OnAddFirewall          += AddFirewall;
     }
@@ -39,22 +38,20 @@ public class TransmissionUI : SerializedMonoBehaviour {
     {
         if (isTryingHack)
             return;
+
+        AudioManager.PlaySound("Hacking");
         isTryingHack = true;
 
         Action<bool> resultCallback = (result) =>
         {
-            Debug.Log("Result " + result);
+            string audioName = result ? "HackSuccess" : "HackFail";
+            AudioManager.PlaySound(audioName);
             isTryingHack = false;
             transmission.TryHack(result);
         };
 
         NumPad.instance.Float();
-        NumPad.instance.Active(transmission.firewalls[transmission.firewalls.Count-1].difficulty, resultCallback);
-    }
-
-    private void Disable()
-    {
-        gameObject.SetActive(false);
+        NumPad.instance.Active(transmission.firewalls[transmission.firewalls.Count - 1].difficulty, resultCallback);
     }
 
     private void AddFirewall(Firewall firewall)
@@ -63,7 +60,7 @@ public class TransmissionUI : SerializedMonoBehaviour {
             firewallUI.SetFirewall(firewall);
             firewallUI.transform.SetParent(firewallHolder, false);
             firewallUI.gameObject.SetActive(true);
-            firewallUI.name = string.Format("Firewall({0})", transmission.firewalls.IndexOf(firewall));
+        firewallUI.name = string.Format("Firewall({0})", transmission.firewalls.IndexOf(firewall));
     }
 
     private void HackFirewall(Firewall fire)

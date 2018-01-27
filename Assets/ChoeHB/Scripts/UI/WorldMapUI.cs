@@ -12,7 +12,10 @@ public class WorldMapUI : MonoBehaviour {
 
     private void Update()
     {
-        if (worldMap.isStarted)
+        if (worldMap.state == WorldMap.State.SelectingCity)
+            timeText.text = FormatTime(worldMap.deadline);
+
+        else
             timeText.text = FormatTime(worldMap.timer.remain);
 
         creditText.text         = worldMap.credit.ToString();

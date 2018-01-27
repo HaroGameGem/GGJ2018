@@ -90,9 +90,8 @@ public class AudioManager : SingletonAsComponent<AudioManager>
         instance.music.Play();
     }
     
-    public static void StopMusic(AudioClip clip)
+    public static void StopMusic()
     {
-        instance.music.clip = null;
         instance.music.Stop();
     }
 

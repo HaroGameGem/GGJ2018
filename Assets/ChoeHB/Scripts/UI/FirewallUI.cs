@@ -9,7 +9,7 @@ public class FirewallUI : MonoBehaviour {
 
     private Firewall firewall;
 
-    public const int RED = 10;
+    public const int RED = 8;
 
     [SerializeField] Image image;
 
@@ -25,8 +25,21 @@ public class FirewallUI : MonoBehaviour {
 
     private void UpdateColor()
     {
+        float srcH, srcS, srcV;
+        float dstH, dstS, dstV;
+
+        Color.RGBToHSV(Color.green, out srcH, out srcS, out srcV);
+        Color.RGBToHSV(Color.red, out dstH, out dstS, out dstV);
+        
         float t = firewall.difficulty / (float)RED;
-        image.color = Color.Lerp(Color.green, Color.red, t);
+        float h, s, v;
+
+        h = Mathf.Lerp(srcH, dstH, t);
+        s = Mathf.Lerp(srcS, dstS, t);
+        v = Mathf.Lerp(srcV, dstV, t);
+
+        Color color = Color.HSVToRGB(h, s, v);
+        image.color = color;
     }
 
 }

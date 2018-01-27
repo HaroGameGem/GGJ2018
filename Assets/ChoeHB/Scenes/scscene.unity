@@ -353,6 +353,12 @@ Prefab:
       propertyPath: m_Name
       value: Yeosu
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -434,10 +440,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  deadline: 300
+  vaccineOccurData:
+    occurInterval: 7
+    defaultOccurRate: 0.3
+    occurRatePerCity: 0.02
+  m_deadline: 300
   incomeInterval: 3
   m_credit:
-    dst: 500
+    dst: 10
     format: '{0} / {1}'
   alarm: {fileID: 74508377}
   canvas: {fileID: 637568053}
@@ -769,6 +779,12 @@ Prefab:
       propertyPath: m_Name
       value: Pyeongchang
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -1127,6 +1143,12 @@ Prefab:
       propertyPath: m_Name
       value: Daejeon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -1396,6 +1418,17 @@ Prefab:
     - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
       propertyPath: m_Name
       value: Daegu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
@@ -2201,6 +2234,12 @@ Prefab:
       propertyPath: m_Name
       value: GwangJu
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -3204,6 +3243,12 @@ Prefab:
       propertyPath: m_Name
       value: Cheorwon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -3468,6 +3513,12 @@ Prefab:
       propertyPath: m_Name
       value: Chungju
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -3581,6 +3632,11 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 8300000, guid: 2e4a6628bb0d044b7bfe836bc218d553, type: 3}
+    - {fileID: 8300000, guid: 842df6f944a684f489e226eba7ebbd87, type: 3}
+    - {fileID: 8300000, guid: 02abdce2180bf4c39a9088805cd49061, type: 3}
+    - {fileID: 8300000, guid: dd183e9c6764f43fba708d4827c7e5d7, type: 3}
+    - {fileID: 8300000, guid: b6d09eb6ea8d6410f885902c05fe077c, type: 3}
     - {fileID: 8300000, guid: e8766958b76904c4b8b43d0fd0d6e1a5, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -3600,16 +3656,76 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 6
     - Name: 
       Entry: 7
       Data: 
     - Name: 
       Entry: 1
-      Data: 
+      Data: Hacking
     - Name: 
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: HackSuccess
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: HackFail
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: Win
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: BGM1
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: BGM2
+    - Name: 
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -3619,7 +3735,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  defaultBGM: {fileID: 0}
+  defaultBGM: {fileID: 8300000, guid: b6d09eb6ea8d6410f885902c05fe077c, type: 3}
   defaultSoundCount: 5
   minPitch: 0.97
   maxPitch: 1.03
@@ -4393,6 +4509,17 @@ Prefab:
       propertyPath: m_Name
       value: Pohang
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -4953,6 +5080,12 @@ Prefab:
       propertyPath: m_Name
       value: Incheon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5277,6 +5410,12 @@ Prefab:
       propertyPath: m_Name
       value: Jeju
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -5512,55 +5651,99 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.81
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4126759447163096, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 4020030718881120, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+    - target: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
-    - target: {fileID: 1243146683747486, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+    - target: {fileID: 1623833442322426, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114047756413219072, guid: eb9435689b780f54ba7f3af72a3405dc,
+    - target: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
         type: 2}
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4258504684727608, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.182
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416894280395296, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -44.210003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4939046356098968, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -30.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873307676181288, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 46.144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073449572540016, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 4.7380004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108561235974158, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -25.90408
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345100178342160, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 58.59258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420967423222694, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -34.8204
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465748306199700, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -24.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944208327431162, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453944304896692, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.597
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: eb9435689b780f54ba7f3af72a3405dc, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1298716104
 GameObject:
@@ -6376,6 +6559,17 @@ Prefab:
     - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
       propertyPath: m_Name
       value: Jeonju
+      objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: serializationData.SerializedFormat
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
@@ -7300,6 +7494,12 @@ Prefab:
       propertyPath: m_Name
       value: Ulsan
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -7604,10 +7804,6 @@ Prefab:
       value: 
       objectReference: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
         type: 2}
-    - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -8062,6 +8258,12 @@ Prefab:
       propertyPath: m_Name
       value: Busan
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -8480,6 +8682,12 @@ Prefab:
       propertyPath: m_Name
       value: Chuncheon
       objectReference: {fileID: 0}
+    - target: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
+        type: 2}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0

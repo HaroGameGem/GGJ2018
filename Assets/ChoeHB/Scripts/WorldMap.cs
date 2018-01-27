@@ -6,15 +6,25 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Random = UnityEngine.Random;
+
+public struct GameResult
+{
+    public bool isCleard;
+    public Progress credit;
+    //public Predicate 
+}
+
 public class WorldMap : StaticComponent<WorldMap> {
 
     // RoadData에서 사용
     public static string[] cityNames    { get { return instance.cityDatas.Select(city => city.name).ToArray(); } }
 
     [Header("Data")]
-    [SerializeField] int deadline;              // 게임 타이머
-    [SerializeField] float incomeInterval;      // 인컴이 오르는 주기
-    [SerializeField] Progress m_credit;         // 현재 화폐 / 목표화폐
+    [SerializeField] VaccineOccurData vaccineOccurData;     // 백신 발생에 대한 정보
+    [SerializeField] int m_deadline;                          // 게임 타이머
+    [SerializeField] float incomeInterval;                  // 인컴이 오르는 주기
+    [SerializeField] Progress m_credit;                     // 현재 화폐 / 목표화폐
 
     [Header("Component")]
     [SerializeField] Alarm alarm;
@@ -25,7 +35,14 @@ public class WorldMap : StaticComponent<WorldMap> {
     [TabGroup("City")] [TableList] [SerializeField] List<CityData> cityDatas;
     [TabGroup("Road")] [TableList] [SerializeField] List<RoadData> roadDatas;
 
-    public bool isStarted                       { get; private set; }
+    public enum State
+    {
+        SelectingCity, Playing, End
+    }
+
+    public State state { get; private set; }
+
+    public int deadline                         { get { return m_deadline; } }
     public Dictionary<City, CityUI> cityUIs     { get; private set; }
     public Timer timer                          { get; private set; }
     public Progress credit
@@ -42,6 +59,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     private void Start()
     {
+        string bgmName = "BGM" + UnityEngine.Random.Range(1, 3); ;
+        AudioManager.PlayMusic(bgmName);
         Initialize();
     }
 
@@ -119,6 +138,7 @@ public class WorldMap : StaticComponent<WorldMap> {
         InitializeCitys();
         InitializeRoads();
         DrawRoads();
+        state = State.SelectingCity;
 
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick += StartCity;
@@ -129,25 +149,54 @@ public class WorldMap : StaticComponent<WorldMap> {
         if (!city.canStart)
             return;
 
-        if (isStarted)
+        if (state != State.SelectingCity)
             throw new Exception("Already Started");
 
+        state = State.Playing;
+
         timer = new Timer(deadline);
-        isStarted = true;
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick -= StartCity;
 
         city.StartingCity();
         CityUI.StartHack();
         alarm.StartAlert(incomeInterval, Income);
+
+        StartCoroutine(VaccineOccuring());
+    }
+
+    private void GameEnd()
+    {
+        bool isWin = credit.isSuccessed;
+
     }
 
     private void Income()
     {
-        int sum = (from city in citys.Values where city.isDestroied select city.income).Sum();
+        int sum = (from city in citys.Values where city.isDestroyed select city.income).Sum();
         credit += sum;
+
         if (credit.isSuccessed)
             GameClear();
+    }
+
+    private IEnumerator VaccineOccuring()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(vaccineOccurData.occurInterval);
+            IEnumerable<City> destroyedCitys = citys.Values.Where(city => city.isDestroyed);
+            float occurRate = vaccineOccurData.GetOccurRate(destroyedCitys.Count());
+            Debug.Log("Vaccine Occuring "+occurRate);
+            foreach (var destroyedCity in destroyedCitys)
+            {
+                // 백신 발생
+                if (Random.Range(0, 1f) < occurRate)
+                {
+                    cityUIs[destroyedCity].OccurVaccine();
+                }
+            }
+        }
     }
 
     private void OnDestroyCity()
@@ -157,7 +206,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     public void GameClear()
     {
-        Debug.Log("Game Clear");
+        AudioManager.StopMusic();
+        AudioManager.PlaySound("Win");
     }
-
+    
 }

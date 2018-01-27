@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Art/TitleScene.unity
     guid: 93e7879d6874eb4429c57cf657412c02
   - enabled: 1
@@ -17,3 +18,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ChoeHB/Scenes/GameScene.unity
     guid: 3d4c8e70aaba4490881691d2b0d69bbd
+=======
+    path: Assets/ThirdParty/mobile_touch_camera/scenes/demo_scene_2d_sideview.unity
+    guid: a388b73fe87ac2147b6658ab45a58fbb
+>>>>>>> bf5c68bb841188843fc9240682f02830a0c1b6ab
