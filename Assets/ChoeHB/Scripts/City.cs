@@ -9,9 +9,6 @@ using UnityEngine.UI;
 [Serializable]
 public class City {
 
-    public static event Action<City> OnStaticRecovery;
-    public static event Action<City> OnStaticDestroy;
-
     public event Action OnRecovery;
     public event Action OnDestroy;
 
@@ -67,12 +64,9 @@ public class City {
 
         // 나를 향하고 있는 Transmission들을 파괴한다.
         FromTransmissions().ForEach(tr => tr.SuccessDestroy());
-
         if (OnDestroy != null)
             OnDestroy();
 
-        if (OnStaticDestroy != null)
-            OnStaticDestroy(this);
     }
 
     // 도시가 복구되면
@@ -83,9 +77,6 @@ public class City {
 
         if (OnRecovery != null)
             OnRecovery();
-
-        if (OnStaticRecovery != null)
-            OnStaticRecovery(this);
     }
 
 

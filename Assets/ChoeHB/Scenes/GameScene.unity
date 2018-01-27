@@ -657,6 +657,7 @@ MonoBehaviour:
     SerializationNodes: []
   vaccineOccurData:
     occurInterval: 10
+    deadline: 0
     defaultOccurRate: 0.3
     occurRatePerCity: 0.02
   m_deadline: 180
@@ -1916,6 +1917,52 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &430416131
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037478758158212, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &450650933
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,7 +2396,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   canvasGroup: {fileID: 528803833}
-  fadingAlpha: 0.7
+  fadingAlpha: 0.4
   touchingArea: {fileID: 1097172638}
   firewallPrefab: {fileID: 269326588}
   firewallHolder: {fileID: 1479257201}
@@ -2943,6 +2990,68 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 576564835}
+--- !u!1 &578491849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 578491850}
+  - component: {fileID: 578491851}
+  m_Layer: 0
+  m_Name: ParticleRecoveryCity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578491850
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578491849}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849619703}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &578491851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 578491849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59dfbc0f4f3a98b4ebf4ad40fc3f43aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolName: ParticleRecoveryCity
+  matchPoolScale: 0
+  matchPoolLayer: 0
+  dontReparent: 0
+  _dontDestroyOnLoad: 0
+  logMessages: 0
+  _perPrefabPoolOptions:
+  - prefab: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+    preloadAmount: 1
+    preloadTime: 0
+    preloadFrames: 2
+    preloadDelay: 0
+    limitInstances: 0
+    limitAmount: 100
+    limitFIFO: 0
+    cullDespawned: 0
+    cullAbove: 50
+    cullDelay: 60
+    cullMaxPerPass: 5
+    _logMessages: 0
+    spawnPool: {fileID: 0}
+  maxParticleDespawnTime: 300
 --- !u!1 &616581214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3258,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -18
   m_TargetDisplay: 0
 --- !u!224 &637568054
 RectTransform:
@@ -3331,6 +3440,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 744}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &682743615
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962124231847310, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &727364218
 GameObject:
   m_ObjectHideFlags: 0
@@ -4548,6 +4703,38 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 844300525}
   m_Script: {fileID: 11500000, guid: 2fd6cb9935ba0ad45bfc7fff2da041f1, type: 3}
+--- !u!1 &849619702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 849619703}
+  m_Layer: 0
+  m_Name: Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &849619703
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 849619702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1785649774}
+  - {fileID: 2031008801}
+  - {fileID: 578491850}
+  - {fileID: 1238917348}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &851440961
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,6 +6039,52 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &1036825893
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425343493461206, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1040770592
 GameObject:
   m_ObjectHideFlags: 0
@@ -7308,6 +7541,68 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1224598192}
+--- !u!1 &1238917347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1238917348}
+  - component: {fileID: 1238917349}
+  m_Layer: 0
+  m_Name: ParticleRecoveryCityFace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238917348
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238917347}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849619703}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1238917349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238917347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59dfbc0f4f3a98b4ebf4ad40fc3f43aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolName: ParticleRecoveryCityFace
+  matchPoolScale: 0
+  matchPoolLayer: 0
+  dontReparent: 0
+  _dontDestroyOnLoad: 0
+  logMessages: 0
+  _perPrefabPoolOptions:
+  - prefab: {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
+    preloadAmount: 1
+    preloadTime: 0
+    preloadFrames: 2
+    preloadDelay: 0
+    limitInstances: 0
+    limitAmount: 100
+    limitFIFO: 0
+    cullDespawned: 0
+    cullAbove: 50
+    cullDelay: 60
+    cullMaxPerPass: 5
+    _logMessages: 0
+    spawnPool: {fileID: 0}
+  maxParticleDespawnTime: 300
 --- !u!1 &1244663555
 GameObject:
   m_ObjectHideFlags: 0
@@ -7515,55 +7810,6 @@ Prefab:
     - target: {fileID: 1623833442322426, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114061942949276702, guid: f08635eec310ef74e9384ee2b454c31d,
-        type: 2}
-      propertyPath: serializationData.SerializedFormat
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4258504684727608, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -5.182
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416894280395296, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -44.210003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4939046356098968, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -30.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873307676181288, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 46.144
-      objectReference: {fileID: 0}
-    - target: {fileID: 4073449572540016, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 4.7380004
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108561235974158, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -25.90408
-      objectReference: {fileID: 0}
-    - target: {fileID: 4345100178342160, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 58.59258
-      objectReference: {fileID: 0}
-    - target: {fileID: 4420967423222694, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -34.8204
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465748306199700, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -24.447
-      objectReference: {fileID: 0}
-    - target: {fileID: 1944208327431162, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4453944304896692, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -5.597
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08635eec310ef74e9384ee2b454c31d, type: 2}
@@ -8356,6 +8602,52 @@ MonoBehaviour:
     SerializationNodes: []
   city1to2: {fileID: 528803834}
   city2to1: {fileID: 2083084129}
+--- !u!1001 &1453573965
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1789439593163854, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1454133365
 GameObject:
   m_ObjectHideFlags: 0
@@ -10272,6 +10564,68 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1785649773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1785649774}
+  - component: {fileID: 1785649775}
+  m_Layer: 0
+  m_Name: ParticleBreakCity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1785649774
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785649773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849619703}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1785649775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785649773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59dfbc0f4f3a98b4ebf4ad40fc3f43aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolName: ParticleBreakCity
+  matchPoolScale: 0
+  matchPoolLayer: 0
+  dontReparent: 0
+  _dontDestroyOnLoad: 0
+  logMessages: 0
+  _perPrefabPoolOptions:
+  - prefab: {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+    preloadAmount: 1
+    preloadTime: 0
+    preloadFrames: 2
+    preloadDelay: 0
+    limitInstances: 0
+    limitAmount: 100
+    limitFIFO: 0
+    cullDespawned: 0
+    cullAbove: 50
+    cullDelay: 60
+    cullMaxPerPass: 5
+    _logMessages: 0
+    spawnPool: {fileID: 0}
+  maxParticleDespawnTime: 300
 --- !u!1 &1808992620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10532,10 +10886,6 @@ Prefab:
       value: 
       objectReference: {fileID: 114354645143866100, guid: 413d3aeba39418c41ac2eae539aff7a2,
         type: 2}
-    - target: {fileID: 1693307901535634, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 413d3aeba39418c41ac2eae539aff7a2, type: 2}
   m_IsPrefabParent: 0
@@ -10854,12 +11204,84 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 4036026250523700, guid: f873aff505b9b463d867b1525529cd01, type: 2}
+    - {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+    - {fileID: 4418738817176132, guid: 9bcbdf8c6ada94d6c9a82cedcadc58bc, type: 2}
+    - {fileID: 4183863022119472, guid: 8caaafb87d67f4ce5928df27fb38b97a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: prefabs
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Transform,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: ParticleBreakCity
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: ParticleBreakCityFace
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: ParticleRecoveryCity
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: 
+      Entry: 1
+      Data: ParticleRecoveryCityFace
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   worldMap: {fileID: 168872096}
 --- !u!4 &1900094331
 Transform:
@@ -11492,6 +11914,68 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &2031008800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2031008801}
+  - component: {fileID: 2031008802}
+  m_Layer: 0
+  m_Name: ParticleBreakCityFace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2031008801
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031008800}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 849619703}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031008802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031008800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59dfbc0f4f3a98b4ebf4ad40fc3f43aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolName: ParticleBreakCityFace
+  matchPoolScale: 0
+  matchPoolLayer: 0
+  dontReparent: 0
+  _dontDestroyOnLoad: 0
+  logMessages: 0
+  _perPrefabPoolOptions:
+  - prefab: {fileID: 4322037753129014, guid: 26975f8ba18e444c6b5f7ccf18f736be, type: 2}
+    preloadAmount: 1
+    preloadTime: 0
+    preloadFrames: 2
+    preloadDelay: 0
+    limitInstances: 0
+    limitAmount: 100
+    limitFIFO: 0
+    cullDespawned: 0
+    cullAbove: 50
+    cullDelay: 60
+    cullMaxPerPass: 5
+    _logMessages: 0
+    spawnPool: {fileID: 0}
+  maxParticleDespawnTime: 300
 --- !u!1 &2032037821
 GameObject:
   m_ObjectHideFlags: 0
@@ -11588,7 +12072,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   canvasGroup: {fileID: 2083084131}
-  fadingAlpha: 0.7
+  fadingAlpha: 0.4
   touchingArea: {fileID: 761111936}
   firewallPrefab: {fileID: 1214974415}
   firewallHolder: {fileID: 771815752}

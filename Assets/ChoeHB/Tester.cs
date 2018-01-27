@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using PathologicalGames;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class Tester : SerializedMonoBehaviour {
 
     [SerializeField] WorldMap worldMap;
+    [SerializeField] Dictionary<string, Transform> prefabs;
 
     private void Awake()
     {
@@ -14,13 +16,13 @@ public class Tester : SerializedMonoBehaviour {
 
     private void Initialize()
     {
-        //// 도시의 해킹과 복구
-        //foreach (var city in worldMap.cityUIs.Keys)
-        //{
-        //    City cachedCity = city;
-        //    cachedCity.OnDestroy += () => DetectCityDestroy(cachedCity);
-        //    cachedCity.OnRecovery += () => DetectRecoveryCity(cachedCity);
-        //}
+        // 도시의 해킹과 복구
+        foreach (var city in worldMap.cityUIs.Keys)
+        {
+            City cachedCity = city;
+            cachedCity.OnDestroy += () => DetectCityDestroy(cachedCity);
+            cachedCity.OnRecovery += () => DetectRecoveryCity(cachedCity);
+        }
 
         //// 백신의 생성
         //Vaccine.OnOccur += DetectOccurVaccine;
@@ -33,13 +35,33 @@ public class Tester : SerializedMonoBehaviour {
     public void DetectCityDestroy(City city)
     {
         var cityUI = CityUI.cityUIs[city];
-        Debug.Log("Destroy " + city.name);
+
+        string particleName;
+        Transform child;
+
+        particleName = "ParticleBreakCity";
+        child = PoolManager.Pools[particleName].Spawn(prefabs[particleName]);
+        child.transform.position = cityUI.transform.position;
+
+        particleName = "ParticleBreakCityFace";
+        child = PoolManager.Pools[particleName].Spawn(prefabs[particleName]);
+        child.transform.position = cityUI.transform.position;
     }
 
     public void DetectRecoveryCity(City city)
     {
         var cityUI = CityUI.cityUIs[city];
-        Debug.Log("Recovery " + city.name);
+
+        string particleName;
+        Transform child;
+
+        particleName = "ParticleRecoveryCity";
+        child = PoolManager.Pools[particleName].Spawn(prefabs[particleName]);
+        child.transform.position = cityUI.transform.position;
+
+        particleName = "ParticleRecoveryCityFace";
+        child = PoolManager.Pools[particleName].Spawn(prefabs[particleName]);
+        child.transform.position = cityUI.transform.position;
     }
 
     public void DetectOccurVaccine(Vaccine vaccine)

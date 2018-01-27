@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -93,7 +94,7 @@ public class AudioManager : SingletonAsComponent<AudioManager>
     
     public static void StopMusic()
     {
-        instance.music.Stop();
+        DOTween.To(() => instance.music.volume, v => instance.music.volume = v, 0, 1).OnComplete(() => instance.music.Stop());
     }
 
     public static void PlaySound(AudioClip clip)
