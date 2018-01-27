@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour {
 
     public eGameState gameState = eGameState.title;
     CinematicManager cinematicManager = null;
-    public GameObject optionCanvas;
-    public GameObject popupExit;
+    GameObject optionCanvas;
+    GameObject popupExit;
 
     public Image imgBlackBoard;
 
@@ -38,13 +38,18 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoInit()
     {
-		yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
-        optionCanvas = GameObject.Find("OptionCanvas");
-        popupExit = GameObject.Find("PopupExit");
-        imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
-        GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
-        GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
-		popupExit.gameObject.SetActive(false);
+        if(optionCanvas == null)
+        {
+            Debug.Log("Test");
+			yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
+			optionCanvas = GameObject.Find("OptionCanvas");
+            Debug.Log(optionCanvas);
+			popupExit = GameObject.Find("PopupExit");
+			imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
+			GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
+			GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
+			popupExit.gameObject.SetActive(false);
+		}
 		yield return new WaitForSeconds(0.5f);
         FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}
@@ -53,6 +58,7 @@ public class GameManager : MonoBehaviour {
     void Start () {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(optionCanvas);
+		SceneManager.UnloadSceneAsync("OptionScene");
 	}
 	
 	// Update is called once per frame
@@ -66,6 +72,8 @@ public class GameManager : MonoBehaviour {
     bool isPopuping = false;
     public void PopupExitPanel()
     {
+        if (gameState == eGameState.loading)
+            return;
         if (isPopuping)
             return;
         isPopuping = true;
@@ -98,7 +106,6 @@ public class GameManager : MonoBehaviour {
             case eGameState.title:
 				Application.Quit();
 				break;
-			case eGameState.loading:
 			case eGameState.playingGame:
                 OnClickGoToTitle();
                 break;
@@ -160,6 +167,7 @@ public class GameManager : MonoBehaviour {
 		yield return new WaitWhile(() => tween.IsPlaying());
 		cinematicManager.HidePrologue();
 		yield return new WaitForSeconds(1f);
+        Camera.main.GetComponent<AudioListener>().enabled = false;
 		yield return SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
 		yield return SceneManager.UnloadSceneAsync("TitleScene");
         yield return SceneManager.UnloadSceneAsync("CinematicScene");
