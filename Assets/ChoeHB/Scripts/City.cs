@@ -2,15 +2,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
 public class City {
 
-    public readonly string name;
-    public readonly Dictionary<City, Transmission> transmissions;
+    public event Action OnDestroy;
 
+    public readonly string name;
+    private readonly Dictionary<City, Transmission> transmissions;
     private readonly IntRange firewallCount; // 벽 갯수
     private readonly IntRange difficulty;    // 각각의 벽당 생기는 수의 갯수
 
@@ -30,15 +32,34 @@ public class City {
         DestroyCity();
     }
 
+    // 도시가 파괴되면
     public void DestroyCity()
     {
         isHacked = true;
-        foreach(var nearCity in transmissions.Keys)
+
+        // 인접한 도시가 
+        foreach (var nearCity in transmissions.Keys)
         {
-            // 나를 향하고 있는 Transmission들
-            Transmission trans = nearCity.transmissions[this];
-                trans.SuccessDestroy();
+
+            // 해킹되지 않았으면 내가 향할 Transmission들을 활성화하고
+            if (!nearCity.isHacked)
+            {
+                Transmission to = transmissions[nearCity];
+                to.Active();
+            }
+
+            // 나를 향하고 있는 Transmission들은 파괴한다.
+            Transmission from = nearCity.transmissions[this];
+                from.SuccessDestroy();
         }
+
+        if (OnDestroy != null)
+            OnDestroy();
+    }
+
+    public IEnumerable<Transmission> GetActivedTransmission()
+    {
+        return transmissions.Values.Where(tr => tr.isActived);
     }
 
     public override string ToString()

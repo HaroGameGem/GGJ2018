@@ -9,25 +9,29 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
     private Transmission transmission;
 
+    [SerializeField] Button hackButton;
     [SerializeField] Text firewallCountText;
-    [SerializeField] Image firewallPrefab;
+    [SerializeField] FirewallUI firewallPrefab;
     [SerializeField] Transform firewallHolder;
 
-    private Stack<Image> firewallImages = new Stack<Image>();
+    private Stack<FirewallUI> firewallUIs = new Stack<FirewallUI>();
     
     public void SetTransmission(Transmission transmission)
     {
         this.transmission = transmission;
         name = string.Format("{0} => {1}",transmission.src.name, transmission.dst.name);
 
-        UpdateFirewall();
+        foreach (var firewall in transmission.firewalls)
+            AddFirewall(firewall);
 
-        transmission.OnSuccessDestroy      += Disable;
-        transmission.OnSuccessHack  += UpdateFirewall;
+        transmission.OnSuccessDestroy       += Disable;
+        transmission.OnSuccessHack          += HackFirewall;
+        transmission.OnAddFirewall          += AddFirewall;
     }
 
     private void Update()
     {
+        hackButton.interactable = transmission.isActived;
         firewallCountText.transform.rotation = Quaternion.identity;
     }
 
@@ -43,31 +47,22 @@ public class TransmissionUI : SerializedMonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    private void UpdateFirewall()
+    private void AddFirewall(Firewall firewall)
     {
-        int firewallCount = transmission.firewalls.Count;
-        int gap = firewallCount - firewallImages.Count;
+        var firewallUI = Instantiate(firewallPrefab, firewallHolder);
+        firewallUI.SetFirewall(firewall);
+        firewallUI.transform.SetParent(firewallHolder, false);
+        firewallUIs.Push(firewallUI);
+        firewallUI.gameObject.SetActive(true);
 
-        // 이미 생성된 방화벽의 갯수 보다 목표 방화벽의 갯수가 더 많으면 새로운 방화벽을 추가한다.
-        if (0 < gap)
-        {
-            for (int i = 0; i < gap; i++)
-            {
-                var instance = Instantiate(firewallPrefab);
-                    instance.transform.SetParent(firewallHolder, false);
-                    firewallImages.Push(instance);
+        firewallCountText.text = "" + transmission.firewalls.Count;
+    }
 
-                instance.gameObject.SetActive(true);
-            }
-        }
-
-        // 기존에 있던 방화벽을 파괴한다.
-        if(gap < 0)
-        {
-            for (int i = 0; i < gap; i++)
-                Destroy(firewallImages.Pop());
-        }
-
-        firewallCountText.text = "" + firewallCount;
+    private void HackFirewall()
+    {
+        Debug.Log("Hack Firewall");
+        Debug.Log(transmission.firewalls.Count);
+        var firewallUI = firewallUIs.Pop();
+        Destroy(firewallUI);
     }
 }

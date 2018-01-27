@@ -6,12 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using DG.Tweening;
+using System.Linq;
 
 public class CityUI : SerializedMonoBehaviour {
 
     public static bool isStarted;
+    public static Dictionary<City, CityUI> cityUIs { get; private set; }
 
-    [SerializeField] Image cityImage;
+    [SerializeField] Character characterPrefab;
+    [SerializeField] Transform characterHolder;
 
     public event Action<City> OnClick;
 
@@ -33,6 +36,9 @@ public class CityUI : SerializedMonoBehaviour {
     public void SetCity(City city)
     {
         this.city = city;
+        cityUIs = cityUIs ?? new Dictionary<City, CityUI>();
+        cityUIs.Add(city, this);
+        city.OnDestroy += Transmission;
     }
 
     public void Click()
@@ -41,6 +47,20 @@ public class CityUI : SerializedMonoBehaviour {
         if (OnClick != null)
             OnClick(city);
     }
+
+    // 캐릭터들을 보냄
+    public void Transmission()
+    {
+        foreach(var transmission in city.GetActivedTransmission())
+        {
+            CityUI target = cityUIs[transmission.dst];
+            Character character = Instantiate(characterPrefab);
+            //character.transform.SetParent(characterHolder, false);
+            character.Transmission(transmission);
+            character.gameObject.SetActive(true);
+        }
+    }
+
 
     private void ZoomIn()
     {
