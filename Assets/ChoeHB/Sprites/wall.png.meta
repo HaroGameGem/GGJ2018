@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6bd179079a38ba04fabae284c71d2079
-timeCreated: 1516999718
+timeCreated: 1517053657
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -94,10 +94,10 @@ TextureImporter:
       name: wall_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 0
-        width: 20
-        height: 64
+        x: 50
+        y: 12
+        width: 27
+        height: 102
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

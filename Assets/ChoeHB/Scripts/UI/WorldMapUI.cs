@@ -23,7 +23,9 @@ public class WorldMapUI : MonoBehaviour {
     {
         int minuite = (int)time / 60;
         int second  = (int)time % 60;
-        return minuite.ToString() + " : " + second.ToString();
+
+        return string.Format("{0} : {1}", minuite.ToString("00"), second.ToString("00"));
+        //return (minuite < 10 ? "0" + minuite.ToString() : minuite.ToString()) + " : " + (second < 10 ? "0" + second.ToString() : second.ToString())
     }
 
 }

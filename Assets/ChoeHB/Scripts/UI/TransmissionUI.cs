@@ -9,10 +9,12 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
     private Transmission transmission;
 
+    [SerializeField] Image touchingArea;
     [SerializeField] Button hackButton;
-    [SerializeField] Text firewallCountText;
     [SerializeField] FirewallUI firewallPrefab;
     [SerializeField] Transform firewallHolder;
+
+    private static bool isTryingHack;
 
     public void SetTransmission(Transmission transmission)
     {
@@ -29,13 +31,23 @@ public class TransmissionUI : SerializedMonoBehaviour {
 
     private void Update()
     {
+        touchingArea.raycastTarget = transmission.isActived;
         hackButton.interactable = transmission.isActived;
-        firewallCountText.transform.rotation = Quaternion.identity;
     }
-
+    
     public void TryHack()
     {
-        Action<bool> resultCallback = transmission.TryHack;
+        if (isTryingHack)
+            return;
+        isTryingHack = true;
+
+        Action<bool> resultCallback = (result) =>
+        {
+            Debug.Log("Result " + result);
+            isTryingHack = false;
+            transmission.TryHack(result);
+        };
+
         NumPad.instance.Float();
         NumPad.instance.Active(transmission.firewalls[transmission.firewalls.Count-1].difficulty, resultCallback);
     }
@@ -52,13 +64,10 @@ public class TransmissionUI : SerializedMonoBehaviour {
             firewallUI.transform.SetParent(firewallHolder, false);
             firewallUI.gameObject.SetActive(true);
             firewallUI.name = string.Format("Firewall({0})", transmission.firewalls.IndexOf(firewall));
-
-        firewallCountText.text = "" + transmission.firewalls.Count;
     }
 
     private void HackFirewall(Firewall fire)
     {
         Destroy(FirewallUI.firewallUIs[fire].gameObject);
-        firewallCountText.text = "" + transmission.firewalls.Count;
     }
 }
