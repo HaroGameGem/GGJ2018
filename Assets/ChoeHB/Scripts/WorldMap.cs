@@ -11,14 +11,18 @@ public class WorldMap : StaticComponent<WorldMap> {
     // RoadData에서 사용
     public static string[] cityNames    { get { return instance.cityDatas.Select(city => city.name).ToArray(); } }
 
-    [TableList] [SerializeField] List<CityData> cityDatas;
-    [TableList] [SerializeField] List<RoadData> roadDatas;
+    [TabGroup("City")] [TableList] [SerializeField] List<CityData> cityDatas;
+    [TabGroup("Road")] [TableList] [SerializeField] List<RoadData> roadDatas;
+
+    [ValueDropdown("GetCityNames")]
+    [SerializeField] string dstCityName;
 
     [SerializeField] Canvas canvas;
     [SerializeField] RoadUI roadUIPrafab;
     [SerializeField] Transform roadHolder;
 
     // 도시마다 다른 도시에 연결되어 있고 연결마다 방화벽이 n개 있다.
+    private City dstCity;
     private List<Road> roads;
     private Dictionary<string, City> citys;
 
@@ -104,6 +108,8 @@ public class WorldMap : StaticComponent<WorldMap> {
         DrawRoads();
 
         // 시작지점 설정
+        dstCity = citys[dstCityName];
+        dstCity.OnDestroy += GameClear;
 
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick += StartCity;
@@ -111,11 +117,24 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     public void StartCity(City city)
     {
+        if (city == dstCity)
+            return;
+
         foreach (var cityUI in cityUIs.Values)
             cityUI.OnClick -= StartCity;
 
         city.StartingCity();
         CityUI.StartHack();
+    }
+
+    private string[] GetCityNames()
+    {
+        return cityNames;
+    }
+
+    public void GameClear()
+    {
+        Debug.Log("Game Clear");
     }
 
 }

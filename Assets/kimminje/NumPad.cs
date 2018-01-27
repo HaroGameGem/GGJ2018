@@ -9,6 +9,8 @@ public class NumPad : StaticComponent<NumPad>
     public Button[] buttons;
     System.Random random = new System.Random();
     public Text[] text;
+
+    public GameObject deadline;
     public Image image;
     public Image Pad;
 
@@ -17,6 +19,7 @@ public class NumPad : StaticComponent<NumPad>
 
     private void Awake()
     {
+        deadline.gameObject.SetActive(false);
         image.gameObject.SetActive(false);
         Pad.gameObject.SetActive(false);
     }
@@ -91,6 +94,7 @@ public class NumPad : StaticComponent<NumPad>
     //패드가 나옴
     public void Float()
     {
+        deadline.gameObject.SetActive(true);
         image.gameObject.SetActive(true);
         Pad.gameObject.SetActive(true);
     }
@@ -98,7 +102,6 @@ public class NumPad : StaticComponent<NumPad>
     //해킹을 시작할때 
     public void Active(int numCount, Action<bool> resultCallback)
     {
-        Debug.Log("adad");
         hack = 1;
         Random();
         int[] PinNum = new int[numCount];
@@ -117,6 +120,7 @@ public class NumPad : StaticComponent<NumPad>
     //끝났을때 다 없애기
     void End()
     {
+        deadline.gameObject.SetActive(false);
         image.gameObject.SetActive(false);
         Pad.gameObject.SetActive(false);
 

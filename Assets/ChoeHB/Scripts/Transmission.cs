@@ -73,7 +73,6 @@ public class Transmission {
 
     private void FailHack()
     {
-        Debug.Log("Fail..");
     }
 
     public override string ToString()
