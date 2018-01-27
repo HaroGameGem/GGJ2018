@@ -5,15 +5,25 @@ using DG.Tweening;
 using UnityEngine.UI;
 using System.Text;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
 
 	public Image imgTitle;
+    public Image imgBG;
+
+    public Image panelContainer;
 	
-    public Image imgPrologue0;
-    public Image imgPrologue1;
+    public Image[] arrImgPrologue;
+    public string[] arrStrPrologue;
+
+    public Image imgEnding0;
+    public Image imgEnding1;
+
+    public Button btnBeginPlay;
 
     public Text textBox;
+    bool isChatting = false;
 
     public AudioSource keyClickSource;
 
@@ -23,7 +33,7 @@ public class TitleManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ChatText(0.12f, 0.08f, "김동글이 다아아 김도윽으응 김동 김동\n김도오옹글으을");
+        
 	}
 	
 	// Update is called once per frame
@@ -34,66 +44,120 @@ public class TitleManager : MonoBehaviour {
         }
 	}
 
-    public int loadPrologueIndex = 0;
-    
+    Coroutine routinePrologue;
     [Button]
-    public void FadeInPrologue()
+    public void ShowPrologue()
     {
-        Image img;
-        if(loadPrologueIndex == 0)
-        {
-            img = imgPrologue0;
-        }
-        else
-        {
-            img = imgPrologue1;
-        }
+        if (routinePrologue != null)
+            return;
+        routinePrologue = StartCoroutine(CoShowPrologue());
+    }
 
-        FadeIn(img, 1f);
+    IEnumerator CoShowPrologue()
+    {
+        FadeIn(imgBG, 1f);
+		yield return new WaitForSeconds(0.8f);
+
+        for (int i = 0; i < arrImgPrologue.Length; i++)
+        {
+			FadeIn(arrImgPrologue[i], 1f);
+			ChatText(textIntervalSecond, textVariabilitySecond, arrStrPrologue[i]);
+			yield return new WaitWhile(() => isChatting);
+			yield return new WaitUntil(() => Input.GetMouseButton(0));
+			FadeOut(arrImgPrologue[i], 1f);
+		}
+
+        btnBeginPlay.transform.localScale = Vector3.zero;
+        btnBeginPlay.gameObject.SetActive(true);
+        btnBeginPlay.transform.DOScale(Vector3.one, 0.5f)
+                    .SetEase(Ease.OutQuad);
+
+        routinePrologue = null;
+    }
+
+    public void HidePrologue()
+    {
+        if (routinePrologue != null)
+            return;
+        routinePrologue = StartCoroutine(CoHidePrologue());
+    }
+
+    IEnumerator CoHidePrologue()
+    {
+        btnBeginPlay.transform.DOScale(Vector3.zero, 0.5f)
+                    .SetEase(Ease.InQuad)
+                    .OnComplete(() => btnBeginPlay.gameObject.SetActive(false));
+        yield return new WaitForSeconds(1f);
+        foreach (var item in arrImgPrologue)
+        {
+            item.gameObject.SetActive(false);
+        }
+        textBox.text = "";
+        yield return StartCoroutine(CoLoadGameScene());
+        FadeOut(imgBG, 1f);
+    }
+
+    IEnumerator CoLoadGameScene()
+    {
+        //yield return SceneManager.LoadSceneAsync("GameScene");
+        yield return null;
+    }
+
+    Coroutine routineEnding;
+    [Button]
+    public void ShowEnding()
+    {
+        if (routineEnding != null)
+            return;
+        routineEnding = StartCoroutine(CoShowEnding());
+    }
+
+    IEnumerator CoShowEnding()
+    {
+        FadeIn(imgBG, 1f);
+        yield return new WaitForSeconds(0.5f);
+        FadeIn(imgEnding0, 0.8f);
+        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        FadeOut(imgEnding0, 0.8f);
+        FadeIn(panelContainer, 0.8f);
+		yield return new WaitForSeconds(0.8f);
+		FadeIn(imgEnding1, 0.8f);
+        ChatText(textIntervalSecond, textVariabilitySecond, "");
     }
 
     void FadeIn(Image img, float duration)
     {
-        if(!img.IsActive())
-        {
-            img.color = Color.white;
-            img.gameObject.SetActive(true);
-        }
         Color color = img.color;
-        color.a = 255f;
+        if(!img.gameObject.activeSelf)
+        {
+            img.color = Color.clear;
+			img.gameObject.SetActive(true);
+        }
+
         img.DOColor(color, duration);
     }
 
-    [Button]
-    public void FadeOutPrologue()
-    {
-		Image img;
-		if (loadPrologueIndex == 0)
-		{
-			img = imgPrologue0;
-		}
-		else
-		{
-			img = imgPrologue1;
-		}
-
-        FadeOut(img, 1f);
-	}
-
     void FadeOut(Image img, float duration)
     {
-		if (!img.IsActive())
+        img.DOKill();
+        if (!img.gameObject.activeSelf)
 		{
             return;
 		}
-        Color color = Color.black;
-		img.DOColor(color, duration);
-        img.gameObject.SetActive(true);
+        Color color = img.color;
+        img.DOColor(Color.clear, duration)
+           .OnComplete(() =>
+        {
+            img.gameObject.SetActive(false);
+            img.color = color;
+        });
 	}
 
 
     public void ChatText(float intervalSecond, float variabilitySecond, string text)
     {
+        isChatting = true;
         StartCoroutine(CoChatText(intervalSecond, variabilitySecond, text));
     }
 
@@ -102,12 +166,24 @@ public class TitleManager : MonoBehaviour {
         StringBuilder builder = new StringBuilder(100);
         for (int i = 0; i < text.Length; i++)
         {
-            yield return new WaitForSeconds(intervalSecond + Random.Range(-variabilitySecond / 2f, variabilitySecond / 2f));
+            if(text[i] == 'n')
+            {
+                builder.Append('\n');
+                continue;
+            }
+                
             builder.Append(text[i]);
             //사운드
             keyClickSource.pitch = Random.Range(0.8f, 1.3f);
             keyClickSource.PlayOneShot(keyClickSource.clip, Random.Range(0.8f, 1f));
             textBox.text = builder.ToString();
-        }
+			yield return new WaitForSeconds(intervalSecond + Random.Range(-variabilitySecond / 2f, variabilitySecond / 2f));
+		}
+        isChatting = false;
+    }
+
+    public void DebugOnClick()
+    {
+        Debug.Log("OnClick");
     }
 }
