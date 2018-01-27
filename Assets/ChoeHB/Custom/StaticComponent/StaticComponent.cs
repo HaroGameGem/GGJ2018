@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StaticComponent<T> : SerializedMonoBehaviour where T : StaticComponent<T> {
-    private static T instance_;
+    protected static T instance_;
     public static T instance
     {
         get
