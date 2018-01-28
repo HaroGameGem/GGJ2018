@@ -149,10 +149,12 @@ public class CinematicManager : MonoBehaviour {
 
 	public void HideEnding()
 	{
-		if (routineEnding == null)
-			return;
-		Debug.Log("HideEnding");
-		StopAllCoroutines();
+		if (routineEnding != null)
+		{
+			StopCoroutine(routineEnding);
+			if (routineChatText != null)
+				StopCoroutine(routineChatText);
+		}
 		routineEnding = StartCoroutine(CoHideEnding());
 	}
 
@@ -188,8 +190,8 @@ public class CinematicManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         Tweener tween = FadeHelper.FadeIn(GameManager.Instance.imgBlackBoard, 1f);
         yield return tween.WaitForCompletion();
-		SceneManager.LoadSceneAsync("TitleScene");
-		FadeHelper.FadeOut(GameManager.Instance.imgBlackBoard, 1f);
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.OnClickGoToTitle();
 	}
 
 

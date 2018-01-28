@@ -715,15 +715,9 @@ MonoBehaviour:
   vaccineOccurData:
     occurInterval: 10
     deadline: 0
-<<<<<<< HEAD
-    defaultOccurRate: 0.3
-    occurRatePerCity: 0.02
-  m_deadline: 3
-=======
     defaultOccurRate: 0.4
     occurRatePerCity: 0.035
   m_deadline: 180
->>>>>>> 65459e31d575d422b71251b15fbba53c4f0cdf66
   incomeInterval: 1
   m_credit:
     dst: 4000
@@ -4914,8 +4908,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: cab6e40c90f5f4d1bb60faeb106ff218, type: 3}
     - {fileID: 8300000, guid: 5cb4a9a49fc45400d8a0ec5aa9d21d60, type: 3}
     - {fileID: 8300000, guid: f9689341379314054b2a25909cb4e628, type: 3}
-    - {fileID: 8300000, guid: a98dc9bc9bbfa4c3a954b519ee163f54, type: 3}
     - {fileID: 8300000, guid: 0a09545e64f4247d9b828802509b8e77, type: 3}
+    - {fileID: 8300000, guid: a98dc9bc9bbfa4c3a954b519ee163f54, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -5096,7 +5090,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 1
-      Data: KJRShout
+      Data: EndingClap
     - Name: 
       Entry: 10
       Data: 12
@@ -5108,7 +5102,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 1
-      Data: EndingClap
+      Data: KJRShout
     - Name: 
       Entry: 10
       Data: 13
