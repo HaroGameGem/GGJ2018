@@ -10,13 +10,6 @@ using System.Linq;
 
 public class CityUI : SerializedMonoBehaviour {
 
-    public enum State
-    {
-        Selecting, Started
-    }
-
-    private static State state = State.Selecting;
-
     public static Dictionary<City, CityUI> cityUIs { get; private set; }
 
     [SerializeField] Image virus;
@@ -37,10 +30,10 @@ public class CityUI : SerializedMonoBehaviour {
 
     private void Update()
     {
-        if (state == State.Selecting)
+        if (WorldMap.instance.state == WorldMap.State.SelectingCity)
             button.interactable = city.canStart;
 
-        if (state == State.Started)
+        if (WorldMap.instance.state == WorldMap.State.Playing)
         {
             // 도시가 파괴되지 않았으면서
             // 주변의 도시들중 하나라도 파괴된 도시가 있다면 이동가능하다
@@ -68,7 +61,7 @@ public class CityUI : SerializedMonoBehaviour {
 
     public void Click()
     {
-        if (state != State.Selecting)
+        if (WorldMap.instance.state == WorldMap.State.SelectingCity)
         {
             CityZoomer.instance.ZoomIn(transform.position);
             NumPad.instance.Float();
@@ -128,9 +121,5 @@ public class CityUI : SerializedMonoBehaviour {
         //city.FromTransmissions().Where( .ForEach(tr => cityUIs[tr.dst].Run(tr));
     }
     
-
-    public static void StartHack()
-    {
-        state = State.Started;
-    }
+    
 }

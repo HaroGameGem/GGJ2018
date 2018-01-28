@@ -168,7 +168,6 @@ public class WorldMap : StaticComponent<WorldMap> {
             cityUI.OnClick -= StartCity;
 
         city.StartingCity();
-        CityUI.StartHack();
         alarm.StartAlert(incomeInterval, Income);
 
         StartCoroutine(VaccineOccuring());

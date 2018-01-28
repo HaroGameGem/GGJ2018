@@ -238,6 +238,21 @@ Prefab:
       propertyPath: imgBlackBoard
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114296336307813062, guid: a73ae32a1755b4464999e0240e2de0f1,
+        type: 2}
+      propertyPath: gameState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114296336307813062, guid: a73ae32a1755b4464999e0240e2de0f1,
+        type: 2}
+      propertyPath: btnExitAccept
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114296336307813062, guid: a73ae32a1755b4464999e0240e2de0f1,
+        type: 2}
+      propertyPath: btnExitCancel
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a73ae32a1755b4464999e0240e2de0f1, type: 2}
   m_IsPrefabParent: 0
@@ -366,7 +381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &78013721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -717,7 +732,7 @@ MonoBehaviour:
     deadline: 0
     defaultOccurRate: 0.3
     occurRatePerCity: 0.02
-  m_deadline: 180
+  m_deadline: 1
   incomeInterval: 1
   m_credit:
     dst: 3000
