@@ -16,6 +16,7 @@ public class Progress
         set
         {
             current_ = Mathf.Min(dst, value);
+            current_ = Mathf.Max(0, current_);
         }
     }
 
@@ -44,6 +45,13 @@ public class Progress
     public static Progress operator ++(Progress progress)
     {
         progress.current++;
+        return progress;
+    }
+
+
+    public static Progress operator --(Progress progress)
+    {
+        progress.current--;
         return progress;
     }
 

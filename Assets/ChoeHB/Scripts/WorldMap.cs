@@ -83,6 +83,7 @@ public class WorldMap : StaticComponent<WorldMap> {
             string name = cityData.name;
             City city = new City(cityData);
             city.OnDestroy += OnDestroyCity;
+            city.OnRecovery += OnRecoveryCity;
             citys.Add(name, city);
 
             CityUI cityUI = cityData.cityUI;
@@ -179,6 +180,7 @@ public class WorldMap : StaticComponent<WorldMap> {
         if (state == State.End)
             return;
 
+        warningUI.gameObject.SetActive(false);
         state = State.End;
         alarm.Stop();
         timer.Stop();
@@ -248,6 +250,11 @@ public class WorldMap : StaticComponent<WorldMap> {
             }
                 
         }
+    }
+
+    private void OnRecoveryCity()
+    {
+        destroyedCitys--;
     }
 
     private void OnDestroyCity()
