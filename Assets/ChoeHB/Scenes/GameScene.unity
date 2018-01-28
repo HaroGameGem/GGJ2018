@@ -715,7 +715,7 @@ MonoBehaviour:
   vaccineOccurData:
     occurInterval: 10
     defaultOccurRate: 0.4
-    occurRatePerCity: 0.035
+    occurRatePerCity: 0.04
   m_deadline: 180
   incomeInterval: 1
   m_credit:
