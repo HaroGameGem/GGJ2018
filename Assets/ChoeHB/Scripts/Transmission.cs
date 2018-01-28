@@ -73,6 +73,8 @@ public class Transmission {
     // 방화벽 1개 부숨
     private void SuccessHack()
     {
+        if (firewalls.Count == 0)
+            return;
         Firewall top = Top();
         firewalls.Remove(top);
 
