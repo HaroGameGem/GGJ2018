@@ -51,7 +51,8 @@ public class Vaccine : MonoBehaviour {
     {
         float startingTime = Time.time;
         float remainingTime = startingTime;
-        while(0 < remainingTime)
+		AudioManager.PlaySound("Warning");
+		while(0 < remainingTime)
         {
             float elapedTime = Time.time - startingTime;
             remainingTime = deadline - elapedTime;

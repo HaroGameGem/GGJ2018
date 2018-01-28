@@ -25,13 +25,22 @@ public class GameManager : MonoBehaviour {
     CinematicManager cinematicManager = null;
     public GameObject optionCanvas;
     public GameObject popupExit;
+    public Button btnExitAccept;
+    public Button btnExitCancel;
 
     public Image imgBlackBoard;
+
+    public AudioSource audioSource;
+    public AudioClip clipUIBtnClick;
 
     private void Awake()
     {
         if (instance != null)
-            Destroy(this);
+        {
+			Destroy(gameObject);
+            return;
+        }
+
         instance = this;
         StartCoroutine(CoInit());
     }
@@ -44,12 +53,26 @@ public class GameManager : MonoBehaviour {
 			optionCanvas = GameObject.Find("OptionCanvas");
 			popupExit = GameObject.Find("PopupExit");
 			imgBlackBoard = GameObject.Find("ImgBlackBoard").GetComponent<Image>();
-			GameObject.Find("BtnExitAccept").GetComponent<Button>().onClick.AddListener(OnClickExitAccept);
-			GameObject.Find("BtnExitCancel").GetComponent<Button>().onClick.AddListener(OnClickExitCancel);
+			btnExitAccept = GameObject.Find("BtnExitAccept").GetComponent<Button>();
+            btnExitCancel = GameObject.Find("BtnExitCancel").GetComponent<Button>();
+			btnExitAccept.onClick.AddListener(OnClickExitAccept);
+			btnExitCancel.onClick.AddListener(OnClickExitCancel);
 			popupExit.gameObject.SetActive(false);
 		}
 		yield return new WaitForSeconds(0.5f);
         FadeHelper.FadeOut(imgBlackBoard, 1f);
+
+        Scene curScene = SceneManager.GetActiveScene();
+        switch (curScene.name)
+        {
+            case "TitleScene":
+				audioSource.Play();
+				break;
+            case "GameScene":
+                break;
+            default:
+                break;
+        }
 	}
 
     // Use this for initialization
@@ -67,6 +90,11 @@ public class GameManager : MonoBehaviour {
         }
 	}
 
+    public void PlaySFXUIBtnClick()
+    {
+		audioSource.PlayOneShot(clipUIBtnClick);
+	}
+
     bool isPopuping = false;
     public void PopupExitPanel()
     {
@@ -74,6 +102,7 @@ public class GameManager : MonoBehaviour {
             return;
         if (isPopuping)
             return;
+        PlaySFXUIBtnClick();
         isPopuping = true;
         StartCoroutine(CoPopupExitPanel());
 	}
@@ -88,17 +117,22 @@ public class GameManager : MonoBehaviour {
 		}
 		else
 		{
+            btnExitAccept.interactable = false;
+            btnExitCancel.interactable = false;
 			popupExit.SetActive(true);
 			Animation anim = popupExit.GetComponent<Animation>();
 			yield return new WaitWhile(() => anim.IsPlaying("Popup"));
             if(gameState == eGameState.playingGame)
     			Time.timeScale = 0f;
+			btnExitAccept.interactable = true;
+			btnExitCancel.interactable = true;
 			isPopuping = false;
 		}
 	}
 
     public void OnClickExitAccept()
     {
+        audioSource.PlayOneShot(clipUIBtnClick);
         Time.timeScale = 1f;
         switch (gameState)
         {
@@ -115,7 +149,12 @@ public class GameManager : MonoBehaviour {
 
     public void OnClickExitCancel()
     {
-        PopupExitPanel();
+        Time.timeScale = 1f;
+        if(popupExit.activeSelf)
+        {
+			PlaySFXUIBtnClick();
+			PopupExitPanel();
+        }
     }
 
     public void OnApplicationQuit()
@@ -126,14 +165,10 @@ public class GameManager : MonoBehaviour {
 #endif
 	}
 
-    public void DebugOnClick()
-    {
-        Debug.Log("OnClick");
-    }
-
     public void OnClickBeginPlay()
     {
-        StartCoroutine(CoBeginPlay());
+        PlaySFXUIBtnClick();
+		StartCoroutine(CoBeginPlay());
     }
 
     IEnumerator CoBeginPlay()
@@ -153,6 +188,7 @@ public class GameManager : MonoBehaviour {
 
     public void OnClickPlayGame()
     {
+        PlaySFXUIBtnClick();
         StartCoroutine(CoPlayGame());
     }
 
@@ -165,7 +201,10 @@ public class GameManager : MonoBehaviour {
 		Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
 		yield return new WaitWhile(() => tween.IsPlaying());
 		cinematicManager.HidePrologue();
+        audioSource.DOFade(0f, 1f);
 		yield return new WaitForSeconds(1f);
+        audioSource.Stop();
+        audioSource.volume = 1f;
         Camera.main.GetComponent<AudioListener>().enabled = false;
 		yield return SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
 		yield return SceneManager.UnloadSceneAsync("TitleScene");
@@ -174,19 +213,37 @@ public class GameManager : MonoBehaviour {
 		gameState = eGameState.playingGame;
     }
 
-    public void EndGame()
+    public void OnClickRestart()
     {
-        
+		PlaySFXUIBtnClick();
+        StartCoroutine(CoRestart());
     }
 
-    IEnumerator CoEndGame()
+    IEnumerator CoRestart()
+    {
+		gameState = eGameState.loading;
+		Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
+		yield return new WaitWhile(() => tween.IsPlaying());
+		yield return new WaitForSeconds(1f);
+        yield return SceneManager.LoadSceneAsync("GameScene");
+		FadeHelper.FadeOut(imgBlackBoard, 1f);
+        gameState = eGameState.playingGame;
+    }
+
+	public void OnClickEnding()
+	{
+        PlaySFXUIBtnClick();
+        StartCoroutine(CoClickEnding());
+	}
+
+    IEnumerator CoClickEnding()
     {
         yield return null;
-		cinematicManager.btnBeginPlay.onClick.AddListener(OnClickPlayGame);
-	}
+    }
 
     public void OnClickGoToTitle()
     {
+        PlaySFXUIBtnClick();
         StartCoroutine(CoGoToTitle());
     }
 
@@ -197,7 +254,10 @@ public class GameManager : MonoBehaviour {
         yield return new WaitWhile(() => tween.IsPlaying());
         OnClickExitCancel();
         yield return SceneManager.LoadSceneAsync("TitleScene");
-		yield return SceneManager.UnloadSceneAsync("OptionScene");
+        GameObject.Find("BeginButton").GetComponent<Button>().onClick.AddListener(OnClickBeginPlay);
+        GameObject.Find("ExitButton").GetComponent<Button>().onClick.AddListener(PopupExitPanel);
+        audioSource.Play();
+
 		FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AudioManager : SingletonAsComponent<AudioManager>
+public class AudioManager : StaticComponent<AudioManager>
 {
     [SerializeField] AudioClip defaultBGM;
     [SerializeField] Dictionary<string, AudioClip> clips;
@@ -43,9 +43,8 @@ public class AudioManager : SingletonAsComponent<AudioManager>
 
     public bool useVibrate = true;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         music = gameObject.AddComponent<AudioSource>();
         music.loop = true;
 
@@ -105,5 +104,19 @@ public class AudioManager : SingletonAsComponent<AudioManager>
         source.clip = clip;
         source.Play();
     }
+
+    public static void FadeOutBGM(float duration)
+    {
+        instance.ActiveFadeOutBGM(duration);
+    }
+
+    void ActiveFadeOutBGM(float duration)
+    {
+        music.DOFade(0f, duration).OnComplete(() => 
+        {
+            music.Stop();
+            music.volume = 1f;
+        });
+	}
 
 }

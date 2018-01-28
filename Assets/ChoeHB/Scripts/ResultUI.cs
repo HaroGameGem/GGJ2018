@@ -24,16 +24,20 @@ public class ResultUI : MonoBehaviour {
 
     public void Restart()
     {
-        SceneManager.LoadScene("GameScene");
+        //SceneManager.LoadScene("GameScene");
+        GameManager.Instance.OnClickRestart();
     }
 
     public void Title()
     {
-        SceneManager.LoadScene("TitleScene");
+        //SceneManager.LoadScene("TitleScene");
+        GameManager.Instance.OnClickGoToTitle();
     }
 
     public void Ending()
     {
         Debug.Log("Ending");
+        GameManager.Instance.OnClickEnding();
+
     }
 }

@@ -188,6 +188,8 @@ public class WorldMap : StaticComponent<WorldMap> {
             result.isCleard = isWin;
             result.time = timer.ToString();
 
+        AudioManager.FadeOutBGM(1f);
+
         AudioManager.PlaySound(isWin ? "Win" : "Lose");
 
         StopAllCoroutines();
