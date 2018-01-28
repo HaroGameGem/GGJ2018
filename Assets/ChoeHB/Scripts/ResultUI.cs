@@ -36,7 +36,6 @@ public class ResultUI : MonoBehaviour {
 
     public void Ending()
     {
-        Debug.Log("Ending");
         GameManager.Instance.OnClickEnding();
 
     }

@@ -151,7 +151,8 @@ public class CinematicManager : MonoBehaviour {
 	{
 		if (routineEnding == null)
 			return;
-        StopAllCoroutines();
+		Debug.Log("HideEnding");
+		StopAllCoroutines();
 		routineEnding = StartCoroutine(CoHideEnding());
 	}
 
@@ -159,30 +160,36 @@ public class CinematicManager : MonoBehaviour {
 	{
 		btnGoToTitle.transform.DOScale(Vector3.zero, 0.5f)
 					.SetEase(Ease.InQuad)
-					.OnComplete(() => btnBeginPlay.gameObject.SetActive(false));
+					.OnComplete(() => btnGoToTitle.gameObject.SetActive(false));
+		textBox.gameObject.SetActive(false);
+		btnSkip.gameObject.SetActive(false);
         textBox.text = "";
-        FadeHelper.FadeIn(imgFade, 1f);
 		yield return new WaitForSeconds(1f);
 		foreach (var item in arrImgEnding)
 		{
 			item.gameObject.SetActive(false);
 		}
-        FadeHelper.FadeOut(imgBG, 1f);
         isPlayingEnding = false;
-        SceneManager.LoadSceneAsync("TitleScene");
+        ShowCredit();
 	}
 
     [Button]
     public void ShowCredit()
     {
-        StartCoroutine(CoShowCredit());
+		textBox.gameObject.SetActive(true);
+		StartCoroutine(CoShowCredit());
     }
 
     IEnumerator CoShowCredit()
     {
         yield return null;
 		ChatText(textIntervalSecond, textVariabilitySecond, strCredit);
-
+        yield return new WaitWhile(() => isChatting);
+        yield return new WaitForSeconds(1f);
+        Tweener tween = FadeHelper.FadeIn(GameManager.Instance.imgBlackBoard, 1f);
+        yield return tween.WaitForCompletion();
+		SceneManager.LoadSceneAsync("TitleScene");
+		FadeHelper.FadeOut(GameManager.Instance.imgBlackBoard, 1f);
 	}
 
 

@@ -61,7 +61,6 @@ public class CityUI : SerializedMonoBehaviour {
 
     public void Click()
     {
-        Debug.Log(WorldMap.instance.state);
         if (WorldMap.instance.state == WorldMap.State.Playing)
         {
             CityZoomer.instance.ZoomIn(transform.position);
