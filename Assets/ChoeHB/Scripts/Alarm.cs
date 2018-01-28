@@ -15,6 +15,11 @@ public class Alarm : MonoBehaviour {
         StartCoroutine(Timer());
     }
 
+    public void Stop()
+    {
+        StopAllCoroutines();
+    }
+
     private IEnumerator Timer()
     {
         while(true)

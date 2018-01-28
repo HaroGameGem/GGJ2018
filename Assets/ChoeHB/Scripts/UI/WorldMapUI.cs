@@ -51,6 +51,8 @@ public class WorldMapUI : MonoBehaviour {
 
     public void Deselect()
     {
+        if (TransmissionUI.isTryingHack)
+            return;
         CityZoomer.instance.ZoomOut();
     }
 }

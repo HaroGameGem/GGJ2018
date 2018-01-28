@@ -9,8 +9,8 @@ public class Progress
     public int dst;
     public string format;
 
-    private int current_;
-    public int current
+    private float current_;
+    public float current
     {
         get { return current_; }
         set
@@ -32,10 +32,10 @@ public class Progress
 
     public override string ToString()
     {
-        return string.Format(format, current, dst);
+        return string.Format(format, (int)current, dst);
     }
 
-    public static Progress operator +(Progress progress, int toAdd)
+    public static Progress operator +(Progress progress, float toAdd)
     {
         progress.current += toAdd;
         return progress;

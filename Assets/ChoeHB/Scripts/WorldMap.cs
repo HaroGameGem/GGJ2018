@@ -30,6 +30,7 @@ public class WorldMap : StaticComponent<WorldMap> {
     [SerializeField] Progress m_credit;                     // 현재 화폐 / 목표화폐
 
     [Header("Component")]
+    [SerializeField] float incomeUpdatingInterval;
     [SerializeField] GameObject readyUI;
     [SerializeField] Animation warningUI;
     [SerializeField] ResultUI resultUI;
@@ -168,7 +169,7 @@ public class WorldMap : StaticComponent<WorldMap> {
             cityUI.OnClick -= StartCity;
 
         city.StartingCity();
-        alarm.StartAlert(incomeInterval, Income);
+        alarm.StartAlert(incomeUpdatingInterval, Income);
 
         StartCoroutine(VaccineOccuring());
     }
@@ -179,6 +180,7 @@ public class WorldMap : StaticComponent<WorldMap> {
             return;
 
         state = State.End;
+        alarm.Stop();
         timer.Stop();
         bool isWin = credit.isSuccessed;
         GameResult result = new GameResult();
@@ -198,7 +200,8 @@ public class WorldMap : StaticComponent<WorldMap> {
 
     private void Income()
     {
-        int sum = (from city in citys.Values where city.isDestroyed select city.income).Sum();
+        float sum = (from city in citys.Values where city.isDestroyed select city.income).Sum();
+        sum *= (incomeUpdatingInterval / incomeInterval);
         credit += sum;
 
         if (credit.isSuccessed)
