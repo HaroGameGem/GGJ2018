@@ -7,8 +7,6 @@ using UnityEngine;
 public struct VaccineOccurData {
 
     public float occurInterval;
-    public float deadline;
-
     [Range(0,1)] public float defaultOccurRate;
     [Range(0,1)] public float occurRatePerCity;
     

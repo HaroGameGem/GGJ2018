@@ -714,7 +714,6 @@ MonoBehaviour:
     SerializationNodes: []
   vaccineOccurData:
     occurInterval: 10
-    deadline: 0
     defaultOccurRate: 0.4
     occurRatePerCity: 0.035
   m_deadline: 180
@@ -5607,7 +5606,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  deadline: 3
+  deadline: 4
   numPad: {fileID: 1553123153}
   image: {fileID: 958937721}
   Pad: {fileID: 1628089518}
