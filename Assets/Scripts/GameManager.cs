@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
     {
         if(optionCanvas == null)
         {
+			Time.timeScale = 1f;
 			yield return SceneManager.LoadSceneAsync("OptionScene", LoadSceneMode.Additive);
 			optionCanvas = GameObject.Find("OptionCanvas");
 			popupExit = GameObject.Find("PopupExit");
@@ -159,10 +160,14 @@ public class GameManager : MonoBehaviour {
 
     public void OnApplicationQuit()
     {
-        Application.CancelQuit();
-#if !UNITY_EDITOR
-        System.Diagnostics.Process.GetCurrentProcess().Kill();
-#endif
+        if(Application.isEditor)
+        {
+			Application.CancelQuit();
+		}
+        else
+        {
+			System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
 	}
 
     public void OnClickBeginPlay()
@@ -174,7 +179,8 @@ public class GameManager : MonoBehaviour {
     IEnumerator CoBeginPlay()
     {
         gameState = eGameState.loading;
-        Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
+		Time.timeScale = 1f;
+		Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
         yield return new WaitWhile(() => tween.IsPlaying());
 		yield return SceneManager.LoadSceneAsync("CinematicScene", LoadSceneMode.Additive);
         cinematicManager = FindObjectOfType<CinematicManager>().GetComponent<CinematicManager>();
@@ -194,7 +200,8 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoPlayGame()
     {
-        cinematicManager.btnSkip.enabled = false;
+		Time.timeScale = 1f;
+		cinematicManager.btnSkip.enabled = false;
         cinematicManager.btnBeginPlay.enabled = false;
         cinematicManager.btnGoToTitle.enabled = false;
 
@@ -222,6 +229,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator CoRestart()
     {
 		gameState = eGameState.loading;
+		Time.timeScale = 1f;
 		Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
 		yield return new WaitWhile(() => tween.IsPlaying());
 		yield return new WaitForSeconds(1f);
@@ -238,8 +246,15 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoClickEnding()
     {
-        yield return null;
-    }
+		Time.timeScale = 1f;
+		yield return null;
+		Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
+		yield return new WaitWhile(() => tween.IsPlaying());
+        yield return SceneManager.LoadSceneAsync("CinematicScene", LoadSceneMode.Additive);
+        cinematicManager = GameObject.Find("CinematicManager").GetComponent<CinematicManager>();
+        cinematicManager.ShowEnding();
+        FadeHelper.FadeOut(imgBlackBoard, 1f);
+	}
 
     public void OnClickGoToTitle()
     {
@@ -249,6 +264,7 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator CoGoToTitle()
     {
+        Time.timeScale = 1f;
         yield return null;
         Tweener tween = FadeHelper.FadeIn(imgBlackBoard, 1f);
         yield return new WaitWhile(() => tween.IsPlaying());

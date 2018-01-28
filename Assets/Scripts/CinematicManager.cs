@@ -114,32 +114,31 @@ public class CinematicManager : MonoBehaviour {
     IEnumerator CoShowEnding()
     {
         isPlayingEnding = true;
-        FadeHelper.FadeIn(imgBG, 1f);
-		yield return new WaitForSeconds(0.8f);
 
 		btnSkip.transform.localScale = Vector3.zero;
 		btnSkip.gameObject.SetActive(true);
 		btnSkip.transform.DOScale(Vector3.one, 0.5f)
 					.SetEase(Ease.OutQuad);
 
-		for (int i = 0; i < arrImgPrologue.Length; i++)
+		for (int i = 0; i < arrImgEnding.Length; i++)
 		{
-            FadeHelper.FadeIn(arrImgEnding[i], 1f);
+			FadeHelper.FadeIn(arrImgEnding[i], 1f);
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrEnding[i]);
 			yield return new WaitWhile(() => isChatting);
 			yield return new WaitUntil(() => Input.GetMouseButton(0));
-            FadeHelper.FadeOut(arrImgEnding[i], 1f);
+			textTouch.gameObject.SetActive(false);
+			FadeHelper.FadeOut(arrImgEnding[i], 1f);
 		}
 
 		btnSkip.transform.DOScale(Vector3.zero, 0.5f)
 			.SetEase(Ease.InQuad)
 			.OnComplete(() => btnSkip.gameObject.SetActive(false));
 
-        btnGoToTitle.transform.localScale = Vector3.zero;
+		btnGoToTitle.transform.localScale = Vector3.zero;
 		btnGoToTitle.gameObject.SetActive(true);
 		btnGoToTitle.transform.DOScale(Vector3.one, 0.5f)
 					.SetEase(Ease.OutQuad);
-					
+
 		routineEnding = null;
     }
 
