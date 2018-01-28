@@ -722,6 +722,7 @@ MonoBehaviour:
   m_credit:
     dst: 3000
     format: '{0} / {1}'
+  incomeUpdatingInterval: 0.2
   readyUI: {fileID: 1339613894}
   warningUI: {fileID: 1168500517}
   resultUI: {fileID: 78013723}
@@ -6665,7 +6666,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
