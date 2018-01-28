@@ -179,6 +179,7 @@ public class WorldMap : StaticComponent<WorldMap> {
         if (state == State.End)
             return;
 
+        warningUI.gameObject.SetActive(false);
         state = State.End;
         alarm.Stop();
         timer.Stop();
