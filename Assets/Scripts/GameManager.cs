@@ -252,7 +252,10 @@ public class GameManager : MonoBehaviour {
 		yield return new WaitWhile(() => tween.IsPlaying());
         yield return SceneManager.LoadSceneAsync("CinematicScene", LoadSceneMode.Additive);
         cinematicManager = GameObject.Find("CinematicManager").GetComponent<CinematicManager>();
-        cinematicManager.ShowEnding();
+		cinematicManager.btnGoToTitle.onClick.AddListener(OnClickGoToTitle);
+        cinematicManager.btnSkip.onClick.AddListener(OnClickGoToTitle);
+		cinematicManager.ShowEnding();
+
         FadeHelper.FadeOut(imgBlackBoard, 1f);
 	}
 

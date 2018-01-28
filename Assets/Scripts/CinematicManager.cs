@@ -122,6 +122,11 @@ public class CinematicManager : MonoBehaviour {
 
 		for (int i = 0; i < arrImgEnding.Length; i++)
 		{
+			if (i == 0)
+				AudioManager.PlaySound("EndingClap");
+			if (i == 2)
+				AudioManager.PlaySound("KJRShout");
+
 			FadeHelper.FadeIn(arrImgEnding[i], 1f);
 			ChatText(textIntervalSecond, textVariabilitySecond, arrStrEnding[i]);
 			yield return new WaitWhile(() => isChatting);
